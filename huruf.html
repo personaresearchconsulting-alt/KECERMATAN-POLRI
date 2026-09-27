@@ -75,19 +75,6 @@
             cursor: not-allowed;
         }
 
-        #sessionBadge {
-            display: none;
-            background: #dcfce7;
-            color: #166534;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-        }
-
         #prepOverlay { 
             position: fixed; 
             top: 0; 
@@ -247,21 +234,21 @@
         <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">Persona Research & Consulting</p>
     </header>
 
-    <!-- LOGIN USER BOX (TANPA PASSWORD) -->
+    <!-- LOGIN / VERIFIKASI USER & PASSWORD -->
     <div id="loginBox">
-        <div id="sessionBadge">✓ Sesi Aktif Disetujui</div><br>
         <input type="text" id="username" placeholder="Nama Lengkap Siswa..." autocomplete="off"><br>
+        <input type="password" id="password" placeholder="Password Sesi / Master..." autocomplete="off"><br>
         <select id="kategoriSoal">
-            <option value="set_1">🔤 Set 1: Kemiripan Melingkar (B, D, P, R, Q)</option>
-            <option value="set_2">🔤 Set 2: Kemiripan Garis Tegak (M, N, W, V, U)</option>
-            <option value="set_3">🔤 Set 3: Kemiripan Garis Lurus (E, F, P, B, R)</option>
-            <option value="set_4">🔤 Set 4: Lengkungan & Lingkaran (C, O, G, Q, D)</option>
-            <option value="set_5">🔤 Set 5: Garis Diagonal & Silang (X, Y, K, V, W)</option>
-            <option value="set_6">🔤 Set 6: Simetri Horizontal & Vertikal (H, I, T, L, F)</option>
-            <option value="set_7">🔤 Set 7: Kemiripan Sudut Lancip (A, V, W, M, N)</option>
-            <option value="set_8">🔤 Set 8: Kombinasi Garis Lengkung-Lurus (J, U, O, C, G)</option>
-            <option value="set_9">🔤 Set 9: Garis Sejajar & Diagonal (Z, N, M, W, K)</option>
-            <option value="set_10">🔤 Set 10: Kemiripan Garis Atas-Bawah (S, Z, E, F, B)</option>
+            <option value="set_1">🔣 Set 1: Variasi Kombinasi Utama A</option>
+            <option value="set_2">🔣 Set 2: Variasi Kombinasi Utama B</option>
+            <option value="set_3">🔣 Set 3: Variasi Kombinasi Utama C</option>
+            <option value="set_4">🔣 Set 4: Variasi Kombinasi Utama D</option>
+            <option value="set_5">🔣 Set 5: Variasi Kombinasi Utama E</option>
+            <option value="set_6">🔣 Set 6: Variasi Kombinasi Utama F</option>
+            <option value="set_7">🔣 Set 7: Variasi Kombinasi Utama G</option>
+            <option value="set_8">🔣 Set 8: Variasi Kombinasi Utama H</option>
+            <option value="set_9">🔣 Set 9: Variasi Kombinasi Utama I</option>
+            <option value="set_10">🔣 Set 10: Variasi Kombinasi Utama J</option>
         </select><br>
         <button class="btn-start" id="btnLogin" onclick="startLogin()">MULAI SIMULASI</button>
         <div id="loginStatus" style="margin-top: 10px; font-size: 13px; font-weight: bold; color: var(--danger);"></div>
@@ -303,7 +290,7 @@
         </table>
         <div style="margin-top: 20px; height: 200px; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px;"><canvas id="chartPauli"></canvas></div>
         <button id="btnDownload" style="background: #27ae60; color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;" onclick="downloadFullPDF()">📥 DOWNLOAD HASIL (PDF)</button>
-        <button class="btn-restart" onclick="backToMenu()">🔄 PILIH SET LAIN (MENU UTAMA)</button>
+        <button class="btn-restart" onclick="backToMenu()">🔄 PILIH SET LAIN</button>
     </div>
 
     <footer>
@@ -312,6 +299,9 @@
 </div>
 
 <script>
+    const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYOUR_ENDPOINT_HERE/exec";
+    const MASTER_PASSWORD = "POLRI";
+
     function preventCopy(e) {
         if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'i')) {
             e.preventDefault();
@@ -328,53 +318,137 @@
         return arr;
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedName = sessionStorage.getItem('prc_user_name');
-        if (savedName) {
-            document.getElementById('username').value = savedName;
-        }
-    });
-
+    // DATABASE 10 SET x 10 KOLOM (TOTAL 100 KOLOM UNIK, TANPA ROTASI/REVERSAL SEDERHANA)
     const BANK_DATABASE = {
+        // SET 1
         set_1: [
-            ["B", "D", "P", "R", "Q"], ["D", "P", "R", "Q", "B"], ["P", "R", "Q", "B", "D"], ["R", "Q", "B", "D", "P"], ["Q", "B", "D", "P", "R"],
-            ["B", "P", "Q", "D", "R"], ["D", "R", "B", "Q", "P"], ["P", "B", "D", "R", "Q"], ["R", "D", "P", "Q", "B"], ["Q", "R", "B", "P", "D"]
+            ["B", "D", "P", "R", "Q"],
+            ["A", "C", "E", "F", "H"],
+            ["J", "K", "L", "M", "N"],
+            ["S", "T", "V", "W", "Z"],
+            ["G", "I", "O", "U", "Y"],
+            ["X", "B", "F", "K", "P"],
+            ["C", "D", "G", "L", "Q"],
+            ["E", "H", "M", "R", "V"],
+            ["I", "J", "N", "S", "W"],
+            ["T", "U", "X", "Y", "Z"]
         ],
+        // SET 2
         set_2: [
-            ["M", "N", "W", "V", "U"], ["N", "W", "V", "U", "M"], ["W", "V", "U", "M", "N"], ["V", "U", "M", "N", "W"], ["U", "M", "N", "W", "V"],
-            ["M", "W", "U", "N", "V"], ["N", "V", "M", "U", "W"], ["W", "M", "N", "V", "U"], ["V", "N", "W", "U", "M"], ["U", "V", "M", "W", "N"]
+            ["M", "N", "W", "V", "U"],
+            ["A", "B", "D", "E", "F"],
+            ["C", "G", "H", "I", "J"],
+            ["K", "L", "O", "P", "Q"],
+            ["R", "S", "T", "X", "Y"],
+            ["Z", "A", "C", "H", "M"],
+            ["B", "D", "F", "I", "N"],
+            ["E", "G", "J", "L", "P"],
+            ["H", "K", "M", "Q", "S"],
+            ["T", "U", "V", "W", "Y"]
         ],
+        // SET 3
         set_3: [
-            ["E", "F", "P", "B", "R"], ["F", "P", "B", "R", "E"], ["P", "B", "R", "E", "F"], ["B", "R", "E", "F", "P"], ["R", "E", "F", "P", "B"],
-            ["E", "P", "R", "F", "B"], ["F", "B", "E", "R", "P"], ["P", "E", "F", "B", "R"], ["B", "F", "P", "R", "E"], ["R", "B", "E", "P", "F"]
+            ["E", "F", "P", "B", "R"],
+            ["A", "C", "G", "I", "K"],
+            ["D", "H", "J", "L", "M"],
+            ["N", "O", "Q", "S", "T"],
+            ["U", "V", "W", "X", "Z"],
+            ["B", "E", "H", "N", "U"],
+            ["C", "F", "I", "O", "V"],
+            ["D", "G", "J", "P", "W"],
+            ["K", "L", "Q", "R", "X"],
+            ["M", "S", "T", "Y", "Z"]
         ],
+        // SET 4
         set_4: [
-            ["C", "O", "G", "Q", "D"], ["O", "G", "Q", "D", "C"], ["G", "Q", "D", "C", "O"], ["Q", "D", "C", "O", "G"], ["D", "C", "O", "G", "Q"],
-            ["C", "G", "Q", "O", "D"], ["O", "D", "C", "Q", "G"], ["G", "C", "O", "D", "Q"], ["Q", "O", "G", "D", "C"], ["D", "Q", "C", "G", "O"]
+            ["C", "O", "G", "Q", "D"],
+            ["A", "B", "E", "H", "I"],
+            ["F", "J", "K", "L", "M"],
+            ["N", "P", "R", "S", "T"],
+            ["U", "V", "W", "X", "Y"],
+            ["Z", "A", "D", "G", "K"],
+            ["B", "C", "F", "H", "L"],
+            ["E", "I", "J", "M", "N"],
+            ["P", "Q", "R", "S", "V"],
+            ["T", "U", "W", "X", "Z"]
         ],
+        // SET 5
         set_5: [
-            ["X", "Y", "K", "V", "W"], ["Y", "K", "V", "W", "X"], ["K", "V", "W", "X", "Y"], ["V", "W", "X", "Y", "K"], ["W", "X", "Y", "K", "V"],
-            ["X", "K", "W", "Y", "V"], ["Y", "V", "X", "W", "K"], ["K", "X", "Y", "V", "W"], ["V", "Y", "K", "W", "X"], ["W", "V", "X", "K", "Y"]
+            ["X", "Y", "K", "V", "W"],
+            ["A", "B", "C", "D", "E"],
+            ["F", "G", "H", "I", "J"],
+            ["L", "M", "N", "O", "P"],
+            ["Q", "R", "S", "T", "U"],
+            ["Z", "A", "F", "L", "Q"],
+            ["B", "G", "M", "R", "V"],
+            ["C", "H", "N", "S", "W"],
+            ["D", "I", "O", "T", "X"],
+            ["E", "J", "P", "U", "Y"]
         ],
+        // SET 6
         set_6: [
-            ["H", "I", "T", "L", "F"], ["I", "T", "L", "F", "H"], ["T", "L", "F", "H", "I"], ["L", "F", "H", "I", "T"], ["F", "H", "I", "T", "L"],
-            ["H", "T", "F", "I", "L"], ["I", "L", "H", "F", "T"], ["T", "H", "I", "L", "F"], ["L", "I", "T", "F", "H"], ["F", "L", "H", "T", "I"]
+            ["H", "I", "T", "L", "F"],
+            ["A", "B", "C", "E", "G"],
+            ["D", "J", "K", "M", "N"],
+            ["O", "P", "Q", "R", "S"],
+            ["U", "V", "W", "X", "Y"],
+            ["Z", "A", "D", "H", "O"],
+            ["B", "C", "E", "I", "P"],
+            ["F", "G", "J", "L", "Q"],
+            ["K", "M", "N", "T", "R"],
+            ["S", "U", "V", "W", "X"]
         ],
+        // SET 7
         set_7: [
-            ["A", "V", "W", "M", "N"], ["V", "W", "M", "N", "A"], ["W", "M", "N", "A", "V"], ["M", "N", "A", "V", "W"], ["N", "A", "V", "W", "M"],
-            ["A", "W", "N", "V", "M"], ["V", "M", "A", "N", "W"], ["W", "A", "V", "M", "N"], ["M", "V", "W", "N", "A"], ["N", "M", "A", "W", "V"]
+            ["A", "V", "W", "M", "N"],
+            ["B", "C", "D", "E", "F"],
+            ["G", "H", "I", "J", "K"],
+            ["L", "O", "P", "Q", "R"],
+            ["S", "T", "U", "X", "Y"],
+            ["Z", "A", "G", "L", "S"],
+            ["B", "H", "M", "T", "V"],
+            ["C", "I", "N", "U", "W"],
+            ["D", "J", "O", "X", "M"],
+            ["E", "F", "P", "Y", "N"]
         ],
+        // SET 8
         set_8: [
-            ["J", "U", "O", "C", "G"], ["U", "O", "C", "G", "J"], ["O", "C", "G", "J", "U"], ["C", "G", "J", "U", "O"], ["G", "J", "U", "O", "C"],
-            ["J", "O", "G", "U", "C"], ["U", "C", "J", "G", "O"], ["O", "J", "U", "C", "G"], ["C", "U", "O", "G", "J"], ["G", "C", "J", "O", "U"]
+            ["J", "U", "O", "C", "G"],
+            ["A", "B", "D", "E", "H"],
+            ["F", "I", "K", "L", "M"],
+            ["N", "P", "Q", "R", "S"],
+            ["T", "V", "W", "X", "Y"],
+            ["Z", "A", "F", "N", "T"],
+            ["B", "C", "G", "I", "V"],
+            ["D", "E", "H", "J", "W"],
+            ["K", "L", "O", "P", "X"],
+            ["M", "Q", "R", "S", "Y"]
         ],
+        // SET 9
         set_9: [
-            ["Z", "N", "M", "W", "K"], ["N", "M", "W", "K", "Z"], ["M", "W", "K", "Z", "N"], ["W", "K", "Z", "N", "M"], ["K", "Z", "N", "M", "W"],
-            ["Z", "M", "K", "N", "W"], ["N", "W", "Z", "K", "M"], ["M", "Z", "N", "W", "K"], ["W", "N", "M", "K", "Z"], ["K", "W", "Z", "M", "N"]
+            ["Z", "N", "M", "W", "K"],
+            ["A", "B", "C", "D", "E"],
+            ["F", "G", "H", "I", "J"],
+            ["L", "O", "P", "Q", "R"],
+            ["S", "T", "U", "V", "X"],
+            ["Y", "A", "F", "L", "S"],
+            ["B", "G", "H", "O", "T"],
+            ["C", "I", "P", "U", "Z"],
+            ["D", "J", "Q", "V", "N"],
+            ["E", "K", "R", "X", "M"]
         ],
+        // SET 10
         set_10: [
-            ["S", "Z", "E", "F", "B"], ["Z", "E", "F", "B", "S"], ["E", "F", "B", "S", "Z"], ["F", "B", "S", "Z", "E"], ["B", "S", "Z", "E", "F"],
-            ["S", "E", "B", "Z", "F"], ["Z", "F", "S", "B", "E"], ["E", "S", "Z", "F", "B"], ["F", "Z", "E", "B", "S"], ["B", "F", "S", "E", "Z"]
+            ["S", "Z", "E", "F", "B"],
+            ["A", "C", "D", "G", "H"],
+            ["I", "J", "K", "L", "M"],
+            ["N", "O", "P", "Q", "R"],
+            ["T", "U", "V", "W", "Y"],
+            ["X", "A", "I", "N", "T"],
+            ["B", "C", "E", "J", "O"],
+            ["D", "F", "K", "P", "U"],
+            ["G", "H", "L", "Q", "V"],
+            ["M", "R", "S", "W", "Z"]
         ]
     };
 
@@ -383,21 +457,43 @@
 
     function startLogin() {
         const u = document.getElementById('username').value.trim();
+        const p = document.getElementById('password').value.trim();
         const statusDiv = document.getElementById('loginStatus');
+
         statusDiv.textContent = "";
 
-        if (!u) {
-            statusDiv.textContent = 'Nama Lengkap Siswa wajib diisi!';
+        if (!u || !p) {
+            statusDiv.textContent = 'Nama dan Password wajib diisi!';
             return;
         }
 
-        sessionStorage.setItem('prc_user_name', u);
-        
+        if (p !== MASTER_PASSWORD) {
+            statusDiv.textContent = 'Password salah!';
+            return;
+        }
+
+        const btn = document.getElementById('btnLogin');
+        btn.disabled = true;
+        btn.textContent = 'MENGECEK SESI...';
+
+        fetch(GAS_ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'login', username: u })
+        }).then(() => {
+            proceedToTest(u);
+        }).catch(() => {
+            proceedToTest(u);
+        });
+    }
+
+    function proceedToTest(userName) {
         const katKey = document.getElementById('kategoriSoal').value;
         MASTER_BANK = BANK_DATABASE[katKey].map(set => shuffleArray(set));
         MASTER_BANK = shuffleArray(MASTER_BANK);
         
-        pName = u;
+        pName = userName;
         document.getElementById('loginBox').style.display = 'none';
         triggerCountdown();
     }
@@ -516,6 +612,13 @@
             },
             options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
         });
+
+        fetch(GAS_ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'submit', username: pName, skor: skorTotal, nilai: nilaiFix, detail: results })
+        }).catch(err => console.log(err));
     }
 
     function backToMenu() {
@@ -527,6 +630,12 @@
         document.getElementById('testArea').style.display = 'none';
         document.getElementById('topRow').style.display = 'none';
         document.getElementById('loginBox').style.display = 'block';
+
+        const btn = document.getElementById('btnLogin');
+        btn.disabled = false;
+        btn.textContent = 'MULAI SIMULASI';
+        document.getElementById('password').value = '';
+        document.getElementById('loginStatus').textContent = '';
 
         document.getElementById('mainHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
