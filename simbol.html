@@ -70,23 +70,6 @@
             font-weight: 600; 
             font-family: 'Inter', sans-serif;
         }
-        .btn-start:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        #sessionBadge {
-            display: none;
-            background: #dcfce7;
-            color: #166534;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-        }
 
         #prepOverlay { 
             position: fixed; 
@@ -249,9 +232,7 @@
 
     <!-- LOGIN USER BOX -->
     <div id="loginBox">
-        <div id="sessionBadge">✓ Sesi Aktif Disetujui</div><br>
         <input type="text" id="username" placeholder="Nama Lengkap Siswa..." autocomplete="off"><br>
-        <input type="password" id="accessPassword" placeholder="Password Akses..." autocomplete="off"><br>
         <select id="kategoriSoal">
             <option value="set_1">🔣 Set 1: Simbol Tipografi Typo (§, ¶, ‡, †, ¤)</option>
             <option value="set_2">🔣 Set 2: Simbol Yunani Klasik (Δ, Ω, Ψ, Σ, Π)</option>
@@ -264,8 +245,7 @@
             <option value="set_9">🔣 Set 9: Simbol Cuaca & Alam (☀, ☁, ☂, ☃, ⚡)</option>
             <option value="set_10">🔣 Set 10: Simbol Musik & Mata Uang (♪, ♫, ♭, ♮, ♯)</option>
         </select><br>
-        <button class="btn-start" id="btnLogin" onclick="startLogin()">MULAI SIMULASI</button>
-        <div id="loginStatus" style="margin-top: 10px; font-size: 13px; font-weight: bold; color: var(--danger);"></div>
+        <button class="btn-start" onclick="startLogin()">MULAI SIMULASI</button>
     </div>
 
     <div id="prepOverlay">
@@ -304,7 +284,7 @@
         </table>
         <div style="margin-top: 20px; height: 200px; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px;"><canvas id="chartPauli"></canvas></div>
         <button id="btnDownload" style="background: #27ae60; color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;" onclick="downloadFullPDF()">📥 DOWNLOAD HASIL (PDF)</button>
-        <button class="btn-restart" onclick="backToMenu()">🔄 PILIH SET LAIN (TANPA LOGIN ULANG)</button>
+        <button class="btn-restart" onclick="backToMenu()">🔄 PILIH SET LAIN</button>
     </div>
 
     <footer>
@@ -313,9 +293,6 @@
 </div>
 
 <script>
-    const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzT6k6bNjGdCbNE1q2DIHgO0Y0aWnhasBInts5DUL6FeEtqxPxh5GDYfSStWznzYZFb/exec";
-    const MASTER_PASSWORD = "YEARI0501";
-
     function preventCopy(e) {
         if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'i')) {
             e.preventDefault();
@@ -332,26 +309,8 @@
         return arr;
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        checkExistingSession();
-    });
-
-    function checkExistingSession() {
-        const isAuth = sessionStorage.getItem('prc_authenticated');
-        const savedName = sessionStorage.getItem('prc_user_name');
-
-        if (isAuth === 'true') {
-            document.getElementById('accessPassword').style.display = 'none';
-            document.getElementById('sessionBadge').style.display = 'inline-block';
-            if (savedName) {
-                document.getElementById('username').value = savedName;
-            }
-        }
-    }
-
     // DATABASE 10 SET SIMBOL ADVANCE
     const BANK_DATABASE = {
-        // SET 1: SIMBOL TIPOGRAFI (§, ¶, ‡, †, ¤)
         set_1: [
             ["§", "¶", "‡", "†", "¤"],
             ["¶", "‡", "†", "¤", "§"],
@@ -364,7 +323,6 @@
             ["†", "¶", "‡", "¤", "§"],
             ["¤", "†", "§", "‡", "¶"]
         ],
-        // SET 2: SIMBOL YUNANI (Δ, Ω, Ψ, Σ, Π)
         set_2: [
             ["Δ", "Ω", "Ψ", "Σ", "Π"],
             ["Ω", "Ψ", "Σ", "Π", "Δ"],
@@ -377,7 +335,6 @@
             ["Σ", "Ω", "Ψ", "Π", "Δ"],
             ["Π", "Σ", "Δ", "Ψ", "Ω"]
         ],
-        // SET 3: SIMBOL KARTU/GAMING (♠, ♣, ♥, ♦, ♤)
         set_3: [
             ["♠", "♣", "♥", "♦", "♤"],
             ["♣", "♥", "♦", "♤", "♠"],
@@ -390,7 +347,6 @@
             ["♦", "♣", "♥", "♤", "♠"],
             ["♤", "♦", "♠", "♣", "♥"]
         ],
-        // SET 4: SIMBOL ARAH PANAH (↑, ↓, ←, →, ↔)
         set_4: [
             ["↑", "↓", "←", "→", "↔"],
             ["↓", "←", "→", "↔", "↑"],
@@ -403,7 +359,6 @@
             ["→", "↓", "←", "↔", "↑"],
             ["↔", "→", "↑", "←", "↓"]
         ],
-        // SET 5: SIMBOL MATEMATIKA/LOGIKA (∞, ∑, √, ∫, ≈)
         set_5: [
             ["∞", "∑", "√", "∫", "≈"],
             ["∑", "√", "∫", "≈", "∞"],
@@ -416,7 +371,6 @@
             ["∫", "∑", "√", "≈", "∞"],
             ["≈", "∫", "∞", "√", "∑"]
         ],
-        // SET 6: SIMBOL BINTANG (★, ✪, ✵, ✹, ✦)
         set_6: [
             ["★", "✪", "✵", "✹", "✦"],
             ["✪", "✵", "✹", "✦", "★"],
@@ -429,7 +383,6 @@
             ["✹", "✪", "✵", "✦", "★"],
             ["✦", "✹", "★", "✵", "✪"]
         ],
-        // SET 7: SIMBOL BENTUK GEOMETRI (▲, ■, ◆, ⬟, ⬢)
         set_7: [
             ["▲", "■", "◆", "⬟", "⬢"],
             ["■", "◆", "⬟", "⬢", "▲"],
@@ -442,7 +395,6 @@
             ["⬟", "■", "◆", "⬢", "▲"],
             ["⬢", "⬟", "▲", "◆", "■"]
         ],
-        // SET 8: SIMBOL OPERATOR (±, ≠, ≤, ≥, ≡)
         set_8: [
             ["±", "≠", "≤", "≥", "≡"],
             ["≠", "≤", "≥", "≡", "±"],
@@ -455,7 +407,6 @@
             ["≥", "≠", "≤", "≡", "±"],
             ["≡", "≥", "±", "≤", "≠"]
         ],
-        // SET 9: SIMBOL CUACA & ALAM (☀, ☁, ☂, ☃, ⚡)
         set_9: [
             ["☀", "☁", "☂", "☃", "⚡"],
             ["☁", "☂", "☃", "⚡", "☀"],
@@ -468,7 +419,6 @@
             ["☃", "☁", "☂", "⚡", "☀"],
             ["⚡", "☃", "☀", "☂", "☁"]
         ],
-        // SET 10: SIMBOL MUSIK & NADA (♪, ♫, ♭, ♮, ♯)
         set_10: [
             ["♪", "♫", "♭", "♮", "♯"],
             ["♫", "♭", "♮", "♯", "♪"],
@@ -486,70 +436,18 @@
     let MASTER_BANK = [];
     let currentIdx = 0, timerLeft = 60, interval = null, results = [], pName = "", activeChars = [];
 
-    async function startLogin() {
+    function startLogin() {
         const u = document.getElementById('username').value.trim();
-        const rawP = document.getElementById('accessPassword').value.trim();
-        const p = rawP.toUpperCase();
-        
-        const statusDiv = document.getElementById('loginStatus');
-        const btnLogin = document.getElementById('btnLogin');
-
-        statusDiv.textContent = "";
-
-        if (!u) return alert('Nama Lengkap Siswa wajib diisi!');
-
-        if (sessionStorage.getItem('prc_authenticated') === 'true') {
-            sessionStorage.setItem('prc_user_name', u);
-            proceedToTest(u);
+        if (!u) {
+            alert('Nama Lengkap Siswa wajib diisi!');
             return;
         }
 
-        if (!rawP) return alert('Password Akses wajib diisi!');
-
-        if (p === MASTER_PASSWORD) {
-            saveSession(u);
-            proceedToTest(u);
-            return;
-        }
-
-        btnLogin.disabled = true;
-        btnLogin.textContent = "VERIFIKASI SERVER...";
-
-        try {
-            const response = await fetch(GAS_ENDPOINT, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ password: rawP, jenis: "SIMBOL" })
-            });
-
-            const data = await response.json();
-
-            if (data.success === true) {
-                saveSession(u);
-                proceedToTest(u);
-            } else {
-                statusDiv.textContent = data.message || "Password tidak valid atau telah kedaluwarsa.";
-            }
-        } catch (err) {
-            console.error(err);
-            statusDiv.textContent = "Server verifikasi tidak dapat dihubungi. Silakan coba lagi.";
-        } finally {
-            btnLogin.disabled = false;
-            btnLogin.textContent = "MULAI SIMULASI";
-        }
-    }
-
-    function saveSession(userName) {
-        sessionStorage.setItem('prc_authenticated', 'true');
-        sessionStorage.setItem('prc_user_name', userName);
-    }
-
-    function proceedToTest(userName) {
         const katKey = document.getElementById('kategoriSoal').value;
         MASTER_BANK = BANK_DATABASE[katKey].map(set => shuffleArray(set));
         MASTER_BANK = shuffleArray(MASTER_BANK);
         
-        pName = userName;
+        pName = u;
         document.getElementById('loginBox').style.display = 'none';
         triggerCountdown();
     }
@@ -680,7 +578,6 @@
         document.getElementById('topRow').style.display = 'none';
         document.getElementById('loginBox').style.display = 'block';
 
-        checkExistingSession();
         document.getElementById('mainHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
