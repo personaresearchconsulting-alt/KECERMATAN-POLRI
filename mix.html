@@ -212,10 +212,9 @@
         <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">Persona Research & Consulting</p>
     </header>
 
-    <!-- LOGIN USER BOX -->
+    <!-- LOGIN USER BOX (PASSWORD DIHAPUS / OPSIONAL) -->
     <div id="loginBox">
         <input type="text" id="username" placeholder="Nama Lengkap Siswa..." autocomplete="off"><br>
-        <input type="password" id="accessPassword" placeholder="Password Akses..." autocomplete="off"><br>
         <select id="kategoriSoal">
             <option value="set_1">📦 Set Gambar 1 (Kendaraan & Rumah)</option>
             <option value="set_2">🛠️ Set Gambar 2 (Perkakas & Alat)</option>
@@ -277,7 +276,6 @@
 
 <script>
     const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzT6k6bNjGdCbNE1q2DIHgO0Y0aWnhasBInts5DUL6FeEtqxPxh5GDYfSStWznzYZFb/exec";
-    const MASTER_PASSWORD = "YEARI0501";
 
     function preventCopy(e) {
         if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'i')) {
@@ -368,180 +366,137 @@
         buku: `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`
     };
 
-    // BANK_DATABASE: Exactly 10 Sets, each with 10 completely unique combinations (no pure rotations/reversals/shuffles of a single base sequence)
     const BANK_DATABASE = {
         set_1: [
             [SVG_ICONS.mobil, SVG_ICONS.sepeda, SVG_ICONS.bus, SVG_ICONS.pesawat, SVG_ICONS.kapal],
-            [SVG_ICONS.pesawat, SVG_ICONS.mobil, SVG_ICONS.sepeda, SVG_ICONS.kapal, SVG_ICONS.bus],
-            [SVG_ICONS.kapal, SVG_ICONS.bus, SVG_ICONS.pesawat, SVG_ICONS.sepeda, SVG_ICONS.mobil],
-            [SVG_ICONS.sepeda, SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.bus, SVG_ICONS.pesawat],
-            [SVG_ICONS.bus, SVG_ICONS.pesawat, SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.sepeda],
-            [SVG_ICONS.mobil, SVG_ICONS.kapal, SVG_ICONS.bus, SVG_ICONS.pesawat, SVG_ICONS.sepeda],
-            [SVG_ICONS.sepeda, SVG_ICONS.pesawat, SVG_ICONS.mobil, SVG_ICONS.kapal, SVG_ICONS.bus],
-            [SVG_ICONS.bus, SVG_ICONS.mobil, SVG_ICONS.sepeda, SVG_ICONS.pesawat, SVG_ICONS.kapal],
-            [SVG_ICONS.pesawat, SVG_ICONS.sepeda, SVG_ICONS.kapal, SVG_ICONS.bus, SVG_ICONS.mobil],
-            [SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.bus, SVG_ICONS.sepeda, SVG_ICONS.pesawat]
+            [SVG_ICONS.sepeda, SVG_ICONS.pesawat, SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.bus],
+            [SVG_ICONS.bus, SVG_ICONS.kapal, SVG_ICONS.sepeda, SVG_ICONS.pesawat, SVG_ICONS.mobil],
+            [SVG_ICONS.pesawat, SVG_ICONS.mobil, SVG_ICONS.bus, SVG_ICONS.kapal, SVG_ICONS.sepeda],
+            [SVG_ICONS.kapal, SVG_ICONS.bus, SVG_ICONS.mobil, SVG_ICONS.sepeda, SVG_ICONS.pesawat],
+            [SVG_ICONS.mobil, SVG_ICONS.pesawat, SVG_ICONS.sepeda, SVG_ICONS.bus, SVG_ICONS.kapal],
+            [SVG_ICONS.sepeda, SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.pesawat, SVG_ICONS.bus],
+            [SVG_ICONS.bus, SVG_ICONS.mobil, SVG_ICONS.pesawat, SVG_ICONS.sepeda, SVG_ICONS.kapal],
+            [SVG_ICONS.pesawat, SVG_ICONS.bus, SVG_ICONS.kapal, SVG_ICONS.mobil, SVG_ICONS.sepeda],
+            [SVG_ICONS.kapal, SVG_ICONS.sepeda, SVG_ICONS.bus, SVG_ICONS.pesawat, SVG_ICONS.mobil]
         ],
         set_2: [
             [SVG_ICONS.palu, SVG_ICONS.obeng, SVG_ICONS.kunci_pas, SVG_ICONS.gunting, SVG_ICONS.penggaris],
-            [SVG_ICONS.gunting, SVG_ICONS.palu, SVG_ICONS.obeng, SVG_ICONS.penggaris, SVG_ICONS.kunci_pas],
-            [SVG_ICONS.penggaris, SVG_ICONS.kunci_pas, SVG_ICONS.gunting, SVG_ICONS.palu, SVG_ICONS.obeng],
-            [SVG_ICONS.obeng, SVG_ICONS.penggaris, SVG_ICONS.palu, SVG_ICONS.kunci_pas, SVG_ICONS.gunting],
-            [SVG_ICONS.kunci_pas, SVG_ICONS.gunting, SVG_ICONS.penggaris, SVG_ICONS.obeng, SVG_ICONS.palu],
-            [SVG_ICONS.palu, SVG_ICONS.kunci_pas, SVG_ICONS.penggaris, SVG_ICONS.gunting, SVG_ICONS.obeng],
-            [SVG_ICONS.obeng, SVG_ICONS.gunting, SVG_ICONS.palu, SVG_ICONS.penggaris, SVG_ICONS.kunci_pas],
-            [SVG_ICONS.kunci_pas, SVG_ICONS.palu, SVG_ICONS.obeng, SVG_ICONS.gunting, SVG_ICONS.penggaris],
-            [SVG_ICONS.gunting, SVG_ICONS.obeng, SVG_ICONS.kunci_pas, SVG_ICONS.penggaris, SVG_ICONS.palu],
-            [SVG_ICONS.penggaris, SVG_ICONS.gunting, SVG_ICONS.palu, SVG_ICONS.kunci_pas, SVG_ICONS.obeng]
+            [SVG_ICONS.obeng, SVG_ICONS.gunting, SVG_ICONS.penggaris, SVG_ICONS.palu, SVG_ICONS.kunci_pas],
+            [SVG_ICONS.kunci_pas, SVG_ICONS.penggaris, SVG_ICONS.obeng, SVG_ICONS.gunting, SVG_ICONS.palu],
+            [SVG_ICONS.gunting, SVG_ICONS.palu, SVG_ICONS.kunci_pas, SVG_ICONS.penggaris, SVG_ICONS.obeng],
+            [SVG_ICONS.penggaris, SVG_ICONS.kunci_pas, SVG_ICONS.gunting, SVG_ICONS.obeng, SVG_ICONS.palu],
+            [SVG_ICONS.palu, SVG_ICONS.gunting, SVG_ICONS.penggaris, SVG_ICONS.kunci_pas, SVG_ICONS.obeng],
+            [SVG_ICONS.obeng, SVG_ICONS.kunci_pas, SVG_ICONS.palu, SVG_ICONS.penggaris, SVG_ICONS.gunting],
+            [SVG_ICONS.kunci_pas, SVG_ICONS.palu, SVG_ICONS.gunting, SVG_ICONS.obeng, SVG_ICONS.penggaris],
+            [SVG_ICONS.gunting, SVG_ICONS.penggaris, SVG_ICONS.obeng, SVG_ICONS.palu, SVG_ICONS.kunci_pas],
+            [SVG_ICONS.penggaris, SVG_ICONS.obeng, SVG_ICONS.kunci_pas, SVG_ICONS.gunting, SVG_ICONS.palu]
         ],
         set_3: [
             [SVG_ICONS.kamera, SVG_ICONS.smartphone, SVG_ICONS.laptop, SVG_ICONS.headphone, SVG_ICONS.televisi],
-            [SVG_ICONS.televisi, SVG_ICONS.kamera, SVG_ICONS.smartphone, SVG_ICONS.laptop, SVG_ICONS.headphone],
+            [SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.televisi, SVG_ICONS.kamera, SVG_ICONS.laptop],
+            [SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.kamera],
+            [SVG_ICONS.headphone, SVG_ICONS.kamera, SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.smartphone],
+            [SVG_ICONS.televisi, SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.kamera, SVG_ICONS.laptop],
+            [SVG_ICONS.kamera, SVG_ICONS.headphone, SVG_ICONS.smartphone, SVG_ICONS.laptop, SVG_ICONS.televisi],
+            [SVG_ICONS.smartphone, SVG_ICONS.televisi, SVG_ICONS.kamera, SVG_ICONS.headphone, SVG_ICONS.laptop],
+            [SVG_ICONS.laptop, SVG_ICONS.kamera, SVG_ICONS.headphone, SVG_ICONS.smartphone, SVG_ICONS.televisi],
             [SVG_ICONS.headphone, SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.kamera, SVG_ICONS.smartphone],
-            [SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.kamera, SVG_ICONS.televisi, SVG_ICONS.laptop],
-            [SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.headphone, SVG_ICONS.smartphone, SVG_ICONS.kamera],
-            [SVG_ICONS.kamera, SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.smartphone, SVG_ICONS.headphone],
-            [SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.kamera, SVG_ICONS.televisi, SVG_ICONS.laptop],
-            [SVG_ICONS.laptop, SVG_ICONS.kamera, SVG_ICONS.smartphone, SVG_ICONS.headphone, SVG_ICONS.televisi],
-            [SVG_ICONS.headphone, SVG_ICONS.smartphone, SVG_ICONS.laptop, SVG_ICONS.televisi, SVG_ICONS.kamera],
-            [SVG_ICONS.televisi, SVG_ICONS.headphone, SVG_ICONS.kamera, SVG_ICONS.laptop, SVG_ICONS.smartphone]
+            [SVG_ICONS.televisi, SVG_ICONS.headphone, SVG_ICONS.laptop, SVG_ICONS.smartphone, SVG_ICONS.kamera]
         ],
         set_4: [
             [SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.raket, SVG_ICONS.barbel, SVG_ICONS.piala],
-            [SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.raket, SVG_ICONS.barbel],
-            [SVG_ICONS.barbel, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket],
-            [SVG_ICONS.bola_basket, SVG_ICONS.barbel, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.raket],
-            [SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.barbel, SVG_ICONS.bola_basket, SVG_ICONS.bola_sepak],
-            [SVG_ICONS.bola_sepak, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_basket, SVG_ICONS.barbel],
-            [SVG_ICONS.bola_basket, SVG_ICONS.barbel, SVG_ICONS.bola_sepak, SVG_ICONS.piala, SVG_ICONS.raket],
-            [SVG_ICONS.raket, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.barbel, SVG_ICONS.piala],
-            [SVG_ICONS.barbel, SVG_ICONS.bola_basket, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_sepak],
-            [SVG_ICONS.piala, SVG_ICONS.barbel, SVG_ICONS.bola_sepak, SVG_ICONS.raket, SVG_ICONS.bola_basket]
+            [SVG_ICONS.bola_basket, SVG_ICONS.barbel, SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.raket],
+            [SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.barbel],
+            [SVG_ICONS.barbel, SVG_ICONS.bola_sepak, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_basket],
+            [SVG_ICONS.piala, SVG_ICONS.bola_basket, SVG_ICONS.barbel, SVG_ICONS.raket, SVG_ICONS.bola_sepak],
+            [SVG_ICONS.bola_sepak, SVG_ICONS.barbel, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_basket],
+            [SVG_ICONS.bola_basket, SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.barbel, SVG_ICONS.raket],
+            [SVG_ICONS.raket, SVG_ICONS.bola_sepak, SVG_ICONS.bola_basket, SVG_ICONS.piala, SVG_ICONS.barbel],
+            [SVG_ICONS.barbel, SVG_ICONS.raket, SVG_ICONS.piala, SVG_ICONS.bola_basket, SVG_ICONS.bola_sepak],
+            [SVG_ICONS.piala, SVG_ICONS.bola_sepak, SVG_ICONS.barbel, SVG_ICONS.raket, SVG_ICONS.bola_basket]
         ],
         set_5: [
             [SVG_ICONS.matahari, SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.bunga, SVG_ICONS.pohon],
-            [SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.bunga],
-            [SVG_ICONS.bunga, SVG_ICONS.payung, SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.awan],
-            [SVG_ICONS.awan, SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.awan, SVG_ICONS.payung],
-            [SVG_ICONS.payung, SVG_ICONS.bunga, SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.awan],
-            [SVG_ICONS.matahari, SVG_ICONS.payung, SVG_ICONS.pohon, SVG_ICONS.awan, SVG_ICONS.bunga],
-            [SVG_ICONS.awan, SVG_ICONS.bunga, SVG_ICONS.matahari, SVG_ICONS.pohon, SVG_ICONS.payung],
-            [SVG_ICONS.payung, SVG_ICONS.matahari, SVG_ICONS.awan, SVG_ICONS.bunga, SVG_ICONS.pohon],
-            [SVG_ICONS.bunga, SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.pohon, SVG_ICONS.matahari],
-            [SVG_ICONS.pohon, SVG_ICONS.bunga, SVG_ICONS.matahari, SVG_ICONS.payung, SVG_ICONS.awan]
+            [SVG_ICONS.awan, SVG_ICONS.bunga, SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.payung],
+            [SVG_ICONS.payung, SVG_ICONS.pohon, SVG_ICONS.matahari, SVG_ICONS.awan, SVG_ICONS.bunga],
+            [SVG_ICONS.bunga, SVG_ICONS.matahari, SVG_ICONS.payung, SVG_ICONS.pohon, SVG_ICONS.awan],
+            [SVG_ICONS.pohon, SVG_ICONS.awan, SVG_ICONS.bunga, SVG_ICONS.matahari, SVG_ICONS.payung],
+            [SVG_ICONS.matahari, SVG_ICONS.pohon, SVG_ICONS.bunga, SVG_ICONS.payung, SVG_ICONS.awan],
+            [SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.matahari, SVG_ICONS.bunga, SVG_ICONS.pohon],
+            [SVG_ICONS.payung, SVG_ICONS.matahari, SVG_ICONS.pohon, SVG_ICONS.awan, SVG_ICONS.bunga],
+            [SVG_ICONS.bunga, SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.matahari, SVG_ICONS.pohon],
+            [SVG_ICONS.pohon, SVG_ICONS.bunga, SVG_ICONS.awan, SVG_ICONS.payung, SVG_ICONS.matahari]
         ],
         set_6: [
             [SVG_ICONS.cangkir, SVG_ICONS.botol, SVG_ICONS.sendok, SVG_ICONS.garpu, SVG_ICONS.panci],
-            [SVG_ICONS.panci, SVG_ICONS.cangkir, SVG_ICONS.botol, SVG_ICONS.sendok, SVG_ICONS.garpu],
-            [SVG_ICONS.garpu, SVG_ICONS.sendok, SVG_ICONS.panci, SVG_ICONS.cangkir, SVG_ICONS.botol],
-            [SVG_ICONS.sendok, SVG_ICONS.garpu, SVG_ICONS.botol, SVG_ICONS.panci, SVG_ICONS.cangkir],
-            [SVG_ICONS.botol, SVG_ICONS.panci, SVG_ICONS.cangkir, SVG_ICONS.garpu, SVG_ICONS.sendok],
-            [SVG_ICONS.cangkir, SVG_ICONS.sendok, SVG_ICONS.panci, SVG_ICONS.botol, SVG_ICONS.garpu],
-            [SVG_ICONS.botol, SVG_ICONS.garpu, SVG_ICONS.cangkir, SVG_ICONS.panci, SVG_ICONS.sendok],
-            [SVG_ICONS.sendok, SVG_ICONS.cangkir, SVG_ICONS.botol, SVG_ICONS.garpu, SVG_ICONS.panci],
-            [SVG_ICONS.garpu, SVG_ICONS.botol, SVG_ICONS.sendok, SVG_ICONS.panci, SVG_ICONS.cangkir],
-            [SVG_ICONS.panci, SVG_ICONS.garpu, SVG_ICONS.cangkir, SVG_ICONS.sendok, SVG_ICONS.botol]
+            [SVG_ICONS.botol, SVG_ICONS.garpu, SVG_ICONS.panci, SVG_ICONS.cangkir, SVG_ICONS.sendok],
+            [SVG_ICONS.sendok, SVG_ICONS.panci, SVG_ICONS.cangkir, SVG_ICONS.botol, SVG_ICONS.garpu],
+            [SVG_ICONS.garpu, SVG_ICONS.cangkir, SVG_ICONS.botol, SVG_ICONS.sendok, SVG_ICONS.panci],
+            [SVG_ICONS.panci, SVG_ICONS.sendok, SVG_ICONS.garpu, SVG_ICONS.panci, SVG_ICONS.cangkir],
+            [SVG_ICONS.cangkir, SVG_ICONS.garpu, SVG_ICONS.sendok, SVG_ICONS.panci, SVG_ICONS.botol],
+            [SVG_ICONS.botol, SVG_ICONS.cangkir, SVG_ICONS.panci, SVG_ICONS.sendok, SVG_ICONS.garpu],
+            [SVG_ICONS.sendok, SVG_ICONS.botol, SVG_ICONS.garpu, SVG_ICONS.cangkir, SVG_ICONS.panci],
+            [SVG_ICONS.garpu, SVG_ICONS.sendok, SVG_ICONS.cangkir, SVG_ICONS.panci, SVG_ICONS.botol],
+            [SVG_ICONS.panci, SVG_ICONS.botol, SVG_ICONS.garpu, SVG_ICONS.cangkir, SVG_ICONS.sendok]
         ],
         set_7: [
             [SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.lingkaran, SVG_ICONS.persegi, SVG_ICONS.segitiga],
-            [SVG_ICONS.segitiga, SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.lingkaran, SVG_ICONS.persegi],
-            [SVG_ICONS.persegi, SVG_ICONS.lingkaran, SVG_ICONS.segitiga, SVG_ICONS.bintang, SVG_ICONS.hati],
-            [SVG_ICONS.lingkaran, SVG_ICONS.persegi, SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.segitiga],
-            [SVG_ICONS.hati, SVG_ICONS.segitiga, SVG_ICONS.persegi, SVG_ICONS.lingkaran, SVG_ICONS.bintang],
-            [SVG_ICONS.bintang, SVG_ICONS.lingkaran, SVG_ICONS.segitiga, SVG_ICONS.hati, SVG_ICONS.persegi],
-            [SVG_ICONS.hati, SVG_ICONS.persegi, SVG_ICONS.bintang, SVG_ICONS.segitiga, SVG_ICONS.lingkaran],
-            [SVG_ICONS.lingkaran, SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.persegi, SVG_ICONS.segitiga],
-            [SVG_ICONS.persegi, SVG_ICONS.hati, SVG_ICONS.lingkaran, SVG_ICONS.segitiga, SVG_ICONS.bintang],
-            [SVG_ICONS.segitiga, SVG_ICONS.persegi, SVG_ICONS.bintang, SVG_ICONS.lingkaran, SVG_ICONS.hati]
+            [SVG_ICONS.hati, SVG_ICONS.persegi, SVG_ICONS.segitiga, SVG_ICONS.bintang, SVG_ICONS.lingkaran],
+            [SVG_ICONS.lingkaran, SVG_ICONS.segitiga, SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.persegi],
+            [SVG_ICONS.persegi, SVG_ICONS.bintang, SVG_ICONS.hati, SVG_ICONS.lingkaran, SVG_ICONS.segitiga],
+            [SVG_ICONS.segitiga, SVG_ICONS.hati, SVG_ICONS.persegi, SVG_ICONS.bintang, SVG_ICONS.lingkaran],
+            [SVG_ICONS.bintang, SVG_ICONS.persegi, SVG_ICONS.lingkaran, SVG_ICONS.segitiga, SVG_ICONS.hati],
+            [SVG_ICONS.hati, SVG_ICONS.segitiga, SVG_ICONS.bintang, SVG_ICONS.persegi, SVG_ICONS.lingkaran],
+            [SVG_ICONS.lingkaran, SVG_ICONS.bintang, SVG_ICONS.persegi, SVG_ICONS.hati, SVG_ICONS.segitiga],
+            [SVG_ICONS.persegi, SVG_ICONS.hati, SVG_ICONS.segitiga, SVG_ICONS.lingkaran, SVG_ICONS.bintang],
+            [SVG_ICONS.segitiga, SVG_ICONS.lingkaran, SVG_ICONS.bintang, SVG_ICONS.persegi, SVG_ICONS.hati]
         ],
         set_8: [
             [SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.peta, SVG_ICONS.kunci, SVG_ICONS.jangkar],
-            [SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.peta, SVG_ICONS.kunci],
-            [SVG_ICONS.kunci, SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.peta],
-            [SVG_ICONS.peta, SVG_ICONS.kunci, SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.kompas],
-            [SVG_ICONS.kompas, SVG_ICONS.peta, SVG_ICONS.kunci, SVG_ICONS.jangkar, SVG_ICONS.koper],
-            [SVG_ICONS.koper, SVG_ICONS.peta, SVG_ICONS.jangkar, SVG_ICONS.kompas, SVG_ICONS.kunci],
-            [SVG_ICONS.kompas, SVG_ICONS.kunci, SVG_ICONS.koper, SVG_ICONS.jangkar, SVG_ICONS.peta],
+            [SVG_ICONS.kompas, SVG_ICONS.kunci, SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.peta],
+            [SVG_ICONS.peta, SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.kunci],
+            [SVG_ICONS.kunci, SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.peta, SVG_ICONS.jangkar],
+            [SVG_ICONS.jangkar, SVG_ICONS.peta, SVG_ICONS.kunci, SVG_ICONS.koper, SVG_ICONS.kompas],
+            [SVG_ICONS.koper, SVG_ICONS.kunci, SVG_ICONS.peta, SVG_ICONS.jangkar, SVG_ICONS.kompas],
+            [SVG_ICONS.kompas, SVG_ICONS.jangkar, SVG_ICONS.koper, SVG_ICONS.peta, SVG_ICONS.kunci],
             [SVG_ICONS.peta, SVG_ICONS.koper, SVG_ICONS.kompas, SVG_ICONS.kunci, SVG_ICONS.jangkar],
-            [SVG_ICONS.kunci, SVG_ICONS.kompas, SVG_ICONS.peta, SVG_ICONS.jangkar, SVG_ICONS.koper],
-            [SVG_ICONS.jangkar, SVG_ICONS.kunci, SVG_ICONS.koper, SVG_ICONS.peta, SVG_ICONS.kompas]
+            [SVG_ICONS.kunci, SVG_ICONS.peta, SVG_ICONS.jangkar, SVG_ICONS.kompas, SVG_ICONS.koper],
+            [SVG_ICONS.jangkar, SVG_ICONS.kompas, SVG_ICONS.kunci, SVG_ICONS.koper, SVG_ICONS.peta]
         ],
         set_9: [
             [SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.tas],
-            [SVG_ICONS.tas, SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.mahkota, SVG_ICONS.sepatu],
-            [SVG_ICONS.sepatu, SVG_ICONS.tas, SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.mahkota],
-            [SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.tas, SVG_ICONS.kacamata, SVG_ICONS.jam],
-            [SVG_ICONS.jam, SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.tas, SVG_ICONS.kacamata],
-            [SVG_ICONS.kacamata, SVG_ICONS.mahkota, SVG_ICONS.tas, SVG_ICONS.jam, SVG_ICONS.sepatu],
-            [SVG_ICONS.jam, SVG_ICONS.sepatu, SVG_ICONS.kacamata, SVG_ICONS.tas, SVG_ICONS.mahkota],
-            [SVG_ICONS.mahkota, SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.sepatu, SVG_ICONS.tas],
-            [SVG_ICONS.sepatu, SVG_ICONS.jam, SVG_ICONS.mahkota, SVG_ICONS.tas, SVG_ICONS.kacamata],
-            [SVG_ICONS.tas, SVG_ICONS.sepatu, SVG_ICONS.kacamata, SVG_ICONS.mahkota, SVG_ICONS.jam]
+            [SVG_ICONS.jam, SVG_ICONS.sepatu, SVG_ICONS.tas, SVG_ICONS.kacamata, SVG_ICONS.mahkota],
+            [SVG_ICONS.mahkota, SVG_ICONS.tas, SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.sepatu],
+            [SVG_ICONS.sepatu, SVG_ICONS.kacamata, SVG_ICONS.jam, SVG_ICONS.mahkota, SVG_ICONS.tas],
+            [SVG_ICONS.tas, SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.tas, SVG_ICONS.kacamata],
+            [SVG_ICONS.kacamata, SVG_ICONS.tas, SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.jam],
+            [SVG_ICONS.jam, SVG_ICONS.kacamata, SVG_ICONS.sepatu, SVG_ICONS.mahkota, SVG_ICONS.tas],
+            [SVG_ICONS.mahkota, SVG_ICONS.sepatu, SVG_ICONS.kacamata, SVG_ICONS.tas, SVG_ICONS.jam],
+            [SVG_ICONS.sepatu, SVG_ICONS.mahkota, SVG_ICONS.tas, SVG_ICONS.jam, SVG_ICONS.kacamata],
+            [SVG_ICONS.tas, SVG_ICONS.jam, SVG_ICONS.kacamata, SVG_ICONS.sepatu, SVG_ICONS.mahkota]
         ],
         set_10: [
             [SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.lonceng, SVG_ICONS.buku],
-            [SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.lonceng],
-            [SVG_ICONS.lonceng, SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.pensil],
-            [SVG_ICONS.pensil, SVG_ICONS.lonceng, SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.paperclip],
-            [SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.lonceng, SVG_ICONS.buku, SVG_ICONS.amplop],
-            [SVG_ICONS.amplop, SVG_ICONS.pensil, SVG_ICONS.buku, SVG_ICONS.paperclip, SVG_ICONS.lonceng],
-            [SVG_ICONS.paperclip, SVG_ICONS.lonceng, SVG_ICONS.amplop, SVG_ICONS.buku, SVG_ICONS.pensil],
-            [SVG_ICONS.pensil, SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.lonceng, SVG_ICONS.buku],
-            [SVG_ICONS.lonceng, SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.buku, SVG_ICONS.amplop],
-            [SVG_ICONS.buku, SVG_ICONS.lonceng, SVG_ICONS.amplop, SVG_ICONS.pensil, SVG_ICONS.paperclip]
+            [SVG_ICONS.paperclip, SVG_ICONS.lonceng, SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.pensil],
+            [SVG_ICONS.pensil, SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.lonceng],
+            [SVG_ICONS.lonceng, SVG_ICONS.amplop, SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.buku],
+            [SVG_ICONS.buku, SVG_ICONS.pensil, SVG_ICONS.lonceng, SVG_ICONS.buku, SVG_ICONS.amplop],
+            [SVG_ICONS.amplop, SVG_ICONS.buku, SVG_ICONS.pensil, SVG_ICONS.lonceng, SVG_ICONS.paperclip],
+            [SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.amplop, SVG_ICONS.buku, SVG_ICONS.lonceng],
+            [SVG_ICONS.pensil, SVG_ICONS.amplop, SVG_ICONS.lonceng, SVG_ICONS.paperclip, SVG_ICONS.buku],
+            [SVG_ICONS.lonceng, SVG_ICONS.paperclip, SVG_ICONS.buku, SVG_ICONS.amplop, SVG_ICONS.pensil],
+            [SVG_ICONS.buku, SVG_ICONS.lonceng, SVG_ICONS.paperclip, SVG_ICONS.pensil, SVG_ICONS.amplop]
         ]
     };
 
     let MASTER_BANK = [];
     let currentIdx = 0, timerLeft = 60, interval = null, results = [], pName = "", activeChars = [];
 
-    async function startLogin() {
+    function startLogin() {
         const u = document.getElementById('username').value.trim();
-        const p = document.getElementById('accessPassword').value.trim();
-        const statusDiv = document.getElementById('loginStatus');
-        const btnLogin = document.getElementById('btnLogin');
-
-        statusDiv.textContent = "";
-
         if (!u) return alert('Nama Lengkap Siswa wajib diisi!');
-        if (!p) return alert('Password Akses wajib diisi!');
 
-        // 1. CEK MASTER PASSWORD LOCAL BYPASS (ADMIN/TESTING)
-        if (p === MASTER_PASSWORD) {
-            proceedToTest(u);
-            return;
-        }
-
-        // 2. JIKA BUKAN MASTER PASSWORD -> VERIFIKASI KE GOOGLE APPS SCRIPT
-        btnLogin.disabled = true;
-        btnLogin.textContent = "VERIFIKASI SERVER...";
-
-        try {
-            const response = await fetch(GAS_ENDPOINT, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: JSON.stringify({
-                    password: p,
-                    jenis: "GAMBAR"
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.success === true) {
-                proceedToTest(u);
-            } else {
-                statusDiv.textContent = data.message || "Password tidak valid atau telah kedaluwarsa.";
-            }
-        } catch (err) {
-            console.error(err);
-            statusDiv.textContent = "Server verifikasi tidak dapat dihubungi. Silakan coba lagi.";
-        } finally {
-            btnLogin.disabled = false;
-            btnLogin.textContent = "MULAI SIMULASI";
-        }
+        proceedToTest(u);
     }
 
     function proceedToTest(userName) {
