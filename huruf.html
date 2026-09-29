@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <style>
         :root {
             --navy: #0b2340;
@@ -16,6 +17,7 @@
             --danger: #c0392b;
             --btn-shadow: #cbd5e1;
         }
+
         body { 
             -webkit-user-select: none; 
             -moz-user-select: none;
@@ -29,6 +31,7 @@
             min-height: 100vh; 
             color: #071130; 
         }
+
         .wrap {
             width: 100%; 
             max-width: 980px; 
@@ -45,7 +48,12 @@
         }
         
         header { text-align: center; margin-bottom: 10px; }
-        #loginBox { text-align: center; padding: 25px 20px; }
+
+        #loginBox { 
+            text-align: center; 
+            padding: 25px 20px; 
+        }
+
         input, select { 
             padding: 12px; 
             width: 320px; 
@@ -59,6 +67,7 @@
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
+
         .btn-start { 
             background: var(--navy); 
             color: #fff; 
@@ -70,6 +79,7 @@
             font-weight: 600; 
             font-family: 'Inter', sans-serif;
         }
+
         .btn-start:disabled {
             background: #94a3b8;
             cursor: not-allowed;
@@ -89,7 +99,12 @@
             flex-direction: column; 
             font-family: 'Inter', sans-serif;
         }
-        #countdownText { font-size: 120px; font-weight: bold; color: var(--navy); }
+
+        #countdownText { 
+            font-size: 120px; 
+            font-weight: bold; 
+            color: var(--navy); 
+        }
 
         .top-row { 
             display: none; 
@@ -101,7 +116,13 @@
             margin-bottom: 10px; 
             font-family: 'Inter', sans-serif;
         }
-        #timer { font-size: 24px; font-weight: 800; color: var(--danger); font-family: monospace; }
+
+        #timer { 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: var(--danger); 
+            font-family: monospace; 
+        }
 
         #testArea { 
             display: none; 
@@ -111,6 +132,7 @@
             flex-grow: 1; 
             justify-content: center; 
         }
+
         .acuan-table { 
             border-collapse: collapse; 
             margin-bottom: 5px; 
@@ -172,6 +194,7 @@
             max-width: 500px; 
             margin-bottom: 10px; 
         }
+
         .pilihan-btn { 
             background: #fff; 
             border: 2px solid var(--navy); 
@@ -183,22 +206,96 @@
             box-shadow: 0 4px 0 var(--btn-shadow); 
             font-family: 'Inter', sans-serif;
         }
-        .pilihan-btn:active { transform: translateY(4px); box-shadow: none; }
 
-        #resultArea { display: none; font-family: 'Inter', sans-serif; }
-        .summary-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
-        .card-skor { background: #f8fafc; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #e2e8f0; }
-        .card-skor b { display: block; font-size: 11px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
-        .val-skor { font-size: 28px; font-weight: 900; color: var(--navy); line-height: 1; }
-        .card-akhir { grid-column: span 2; background: var(--navy) !important; color: #fff !important; }
-        .card-akhir .val-skor { color: var(--gold); font-size: 42px; }
+        .pilihan-btn:active { 
+            transform: translateY(4px); 
+            box-shadow: none; 
+        }
+
+        #resultArea { 
+            display: none; 
+            font-family: 'Inter', sans-serif; 
+        }
+
+        .summary-cards { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+            margin: 20px 0; 
+        }
+
+        .card-skor { 
+            background: #f8fafc; 
+            padding: 15px; 
+            border-radius: 10px; 
+            text-align: center; 
+            border: 1px solid #e2e8f0; 
+        }
+
+        .card-skor b { 
+            display: block; 
+            font-size: 11px; 
+            color: #64748b; 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+        }
+
+        .val-skor { 
+            font-size: 28px; 
+            font-weight: 900; 
+            color: var(--navy); 
+            line-height: 1; 
+        }
+
+        .card-akhir { 
+            grid-column: span 2; 
+            background: var(--navy) !important; 
+            color: #fff !important; 
+        }
+
+        .card-akhir .val-skor { 
+            color: var(--gold); 
+            font-size: 42px; 
+        }
         
-        .table-res { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 15px; }
-        .table-res th, .table-res td { border: 1px solid #cbd5e1; padding: 8px; text-align: center; }
-        .table-res th { background: var(--navy); color: #fff; }
-        .kat-badge { display: inline-block; padding: 3px 8px; border-radius: 15px; font-size: 9px; font-weight: bold; margin-top: 5px; text-transform: uppercase; }
-        .bg-sukses { background: #dcfce7; color: #166534; }
-        .bg-bahaya { background: #fee2e2; color: #991b1b; }
+        .table-res { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 11px; 
+            margin-top: 15px; 
+        }
+
+        .table-res th, 
+        .table-res td { 
+            border: 1px solid #cbd5e1; 
+            padding: 8px; 
+            text-align: center; 
+        }
+
+        .table-res th { 
+            background: var(--navy); 
+            color: #fff; 
+        }
+
+        .kat-badge { 
+            display: inline-block; 
+            padding: 3px 8px; 
+            border-radius: 15px; 
+            font-size: 9px; 
+            font-weight: bold; 
+            margin-top: 5px; 
+            text-transform: uppercase; 
+        }
+
+        .bg-sukses { 
+            background: #dcfce7; 
+            color: #166534; 
+        }
+
+        .bg-bahaya { 
+            background: #fee2e2; 
+            color: #991b1b; 
+        }
 
         .btn-restart {
             background: var(--navy);
@@ -222,22 +319,50 @@
             border-top: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
         }
-        footer a { color: #25d366; font-weight: bold; text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
+
+        footer a { 
+            color: #25d366; 
+            font-weight: bold; 
+            text-decoration: none; 
+        }
+
+        footer a:hover { 
+            text-decoration: underline; 
+        }
     </style>
 </head>
+
 <body>
 
 <div class="wrap" id="captureArea">
+
     <header id="mainHeader">
-        <h1 style="font-size: 20px; color: var(--navy); margin: 0;">TRYOUT TES KECERMATAN HURUF KAPITAL ADVANCE</h1>
-        <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">Persona Research & Consulting</p>
+        <h1 style="font-size: 20px; color: var(--navy); margin: 0;">
+            TRYOUT TES KECERMATAN HURUF KAPITAL ADVANCE
+        </h1>
+
+        <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">
+            Persona Research & Consulting
+        </p>
     </header>
 
-    <!-- LOGIN / VERIFIKASI USER & PASSWORD -->
+    <!-- LOGIN -->
     <div id="loginBox">
-        <input type="text" id="username" placeholder="Nama Lengkap Siswa..." autocomplete="off"><br>
-        <input type="password" id="password" placeholder="Password Sesi / Master..." autocomplete="off"><br>
+
+        <input 
+            type="text" 
+            id="username" 
+            placeholder="Nama Lengkap Siswa..." 
+            autocomplete="off"
+        ><br>
+
+        <input 
+            type="password" 
+            id="password" 
+            placeholder="Password Sesi / Master..." 
+            autocomplete="off"
+        ><br>
+
         <select id="kategoriSoal">
             <option value="set_1">🔣 Set 1: Variasi Kombinasi Utama A</option>
             <option value="set_2">🔣 Set 2: Variasi Kombinasi Utama B</option>
@@ -250,409 +375,1124 @@
             <option value="set_9">🔣 Set 9: Variasi Kombinasi Utama I</option>
             <option value="set_10">🔣 Set 10: Variasi Kombinasi Utama J</option>
         </select><br>
-        <button class="btn-start" id="btnLogin" onclick="startLogin()">MULAI SIMULASI</button>
-        <div id="loginStatus" style="margin-top: 10px; font-size: 13px; font-weight: bold; color: var(--danger);"></div>
+
+        <button 
+            class="btn-start" 
+            id="btnLogin" 
+            onclick="startLogin()"
+        >
+            MULAI SIMULASI
+        </button>
+
+        <div 
+            id="loginStatus" 
+            style="margin-top: 10px; font-size: 13px; font-weight: bold; color: var(--danger);"
+        ></div>
+
     </div>
 
+
+    <!-- COUNTDOWN -->
     <div id="prepOverlay">
-        <div style="font-size: 18px; margin-bottom: 10px; color: #64748b;">FOKUS PADA KARAKTER HURUF KAPITAL...</div>
-        <div id="countdownText">3</div>
-    </div>
 
-    <div class="top-row" id="topRow">
-        <div id="kolomInfo" style="font-weight: bold;">KOLOM: 1 / 10</div>
-        <div id="timer">00:60</div>
-    </div>
-
-    <div id="testArea">
-        <table class="acuan-table">
-            <tr id="rowSimbol"></tr>
-            <tr id="rowLabel"></tr>
-        </table>
-        <div class="soal-box" id="soalCont"></div>
-        <div id="pilihan" class="pilihan-grid"></div>
-    </div>
-
-    <div id="resultArea">
-        <h2 style="text-align: center; font-size: 18px; margin-bottom: 5px;">LAPORAN HASIL AKHIR</h2>
-        <p id="resName" style="text-align: center; font-weight: 900; font-size: 22px; color: var(--navy); margin: 0 0 15px 0; border-bottom: 2px solid var(--navy); padding-bottom: 10px; text-transform: uppercase;"></p>
-        
-        <div id="summaryBox" class="summary-cards"></div>
-
-        <div style="background: #f1f5f9; padding: 15px; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
-            <b style="color: var(--navy); font-size: 13px;">ANALISA HASIL / INTERPRETASI:</b>
-            <div id="kesimpulanNarasi" style="margin-top: 8px; line-height: 1.5; font-size: 12px; color: #334155;"></div>
+        <div style="font-size: 18px; margin-bottom: 10px; color: #64748b;">
+            FOKUS PADA KARAKTER HURUF KAPITAL...
         </div>
 
-        <table class="table-res">
-            <thead><tr><th>Kolom</th><th>Terjawab</th><th>Benar</th><th>Salah</th><th>+/-</th></tr></thead>
-            <tbody id="tbodyHasil"></tbody>
-        </table>
-        <div style="margin-top: 20px; height: 200px; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px;"><canvas id="chartPauli"></canvas></div>
-        <button id="btnDownload" style="background: #27ae60; color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;" onclick="downloadFullPDF()">📥 DOWNLOAD HASIL (PDF)</button>
-        <button class="btn-restart" onclick="backToMenu()">🔄 PILIH SET LAIN</button>
+        <div id="countdownText">3</div>
+
     </div>
 
+
+    <!-- TOP ROW -->
+    <div class="top-row" id="topRow">
+
+        <div id="kolomInfo" style="font-weight: bold;">
+            KOLOM: 1 / 10
+        </div>
+
+        <div id="timer">
+            00:60
+        </div>
+
+    </div>
+
+
+    <!-- TEST -->
+    <div id="testArea">
+
+        <table class="acuan-table">
+
+            <tr id="rowSimbol"></tr>
+
+            <tr id="rowLabel"></tr>
+
+        </table>
+
+
+        <div class="soal-box" id="soalCont"></div>
+
+        <div id="pilihan" class="pilihan-grid"></div>
+
+    </div>
+
+
+    <!-- RESULT -->
+    <div id="resultArea">
+
+        <h2 style="text-align: center; font-size: 18px; margin-bottom: 5px;">
+            LAPORAN HASIL AKHIR
+        </h2>
+
+        <p 
+            id="resName" 
+            style="text-align: center; font-weight: 900; font-size: 22px; color: var(--navy); margin: 0 0 15px 0; border-bottom: 2px solid var(--navy); padding-bottom: 10px; text-transform: uppercase;"
+        ></p>
+
+
+        <div id="summaryBox" class="summary-cards"></div>
+
+
+        <div style="background: #f1f5f9; padding: 15px; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
+
+            <b style="color: var(--navy); font-size: 13px;">
+                ANALISA HASIL / INTERPRETASI:
+            </b>
+
+            <div 
+                id="kesimpulanNarasi" 
+                style="margin-top: 8px; line-height: 1.5; font-size: 12px; color: #334155;"
+            ></div>
+
+        </div>
+
+
+        <table class="table-res">
+
+            <thead>
+                <tr>
+                    <th>Kolom</th>
+                    <th>Terjawab</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>+/-</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbodyHasil"></tbody>
+
+        </table>
+
+
+        <div style="margin-top: 20px; height: 200px; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px;">
+            <canvas id="chartPauli"></canvas>
+        </div>
+
+
+        <button 
+            id="btnDownload" 
+            style="background: #27ae60; color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;" 
+            onclick="downloadFullPDF()"
+        >
+            📥 DOWNLOAD HASIL (PDF)
+        </button>
+
+
+        <button 
+            class="btn-restart" 
+            onclick="backToMenu()"
+        >
+            🔄 PILIH SET LAIN
+        </button>
+
+    </div>
+
+
     <footer>
-        &copy; Persona Research & Consulting | WhatsApp: <a href="https://wa.me/6287742515786" target="_blank" rel="noopener noreferrer">0877 4251 5786</a>
+        &copy; Persona Research & Consulting | WhatsApp:
+        <a 
+            href="https://wa.me/6287742515786" 
+            target="_blank" 
+            rel="noopener noreferrer"
+        >
+            0877 4251 5786
+        </a>
     </footer>
+
 </div>
 
+
 <script>
-    const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYOUR_ENDPOINT_HERE/exec";
-    const MASTER_PASSWORD = "POLRI";
 
-    function preventCopy(e) {
-        if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'i')) {
-            e.preventDefault();
-            alert("Aksi disembunyikan/dilindungi oleh sistem.");
-        }
+/* =========================================================
+   GOOGLE APPS SCRIPT
+   PASSWORD TIDAK LAGI DISIMPAN DI HTML
+   ========================================================= */
+
+const GAS_ENDPOINT =
+"https://script.google.com/macros/s/AKfycby_GHSZPDg7UlT_-VJQtw10739IACif9FfnQ5R6M8vvK_i28L3YMbEUk7gasWLgWNNF/exec";
+
+
+/* =========================================================
+   DEVICE ID
+   ========================================================= */
+
+function getDeviceId(){
+
+    const rawData = [
+        navigator.userAgent,
+        navigator.platform,
+        navigator.language,
+        screen.width,
+        screen.height,
+        window.devicePixelRatio,
+        Intl.DateTimeFormat().resolvedOptions().timeZone,
+        navigator.hardwareConcurrency || "cpu"
+    ].join("###");
+
+    let hash = 0;
+
+    for(let i = 0; i < rawData.length; i++){
+
+        hash = ((hash << 5) - hash) + rawData.charCodeAt(i);
+
+        hash |= 0;
     }
 
-    function shuffleArray(array) {
-        let arr = [...array];
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
+    return "PRC-" + Math.abs(hash);
+}
+
+
+/* =========================================================
+   PROTEKSI COPY
+   ========================================================= */
+
+function preventCopy(e){
+
+    if(
+        e.ctrlKey &&
+        (
+            e.key === 'c' ||
+            e.key === 'u' ||
+            e.key === 's' ||
+            e.key === 'i'
+        )
+    ){
+
+        e.preventDefault();
+
+        alert("Aksi disembunyikan/dilindungi oleh sistem.");
+
     }
 
-    // DATABASE 10 SET x 10 KOLOM (TOTAL 100 KOLOM UNIK, TANPA ROTASI/REVERSAL SEDERHANA)
-    const BANK_DATABASE = {
-        // SET 1
-        set_1: [
-            ["B", "D", "P", "R", "Q"],
-            ["A", "C", "E", "F", "H"],
-            ["J", "K", "L", "M", "N"],
-            ["S", "T", "V", "W", "Z"],
-            ["G", "I", "O", "U", "Y"],
-            ["X", "B", "F", "K", "P"],
-            ["C", "D", "G", "L", "Q"],
-            ["E", "H", "M", "R", "V"],
-            ["I", "J", "N", "S", "W"],
-            ["T", "U", "X", "Y", "Z"]
-        ],
-        // SET 2
-        set_2: [
-            ["M", "N", "W", "V", "U"],
-            ["A", "B", "D", "E", "F"],
-            ["C", "G", "H", "I", "J"],
-            ["K", "L", "O", "P", "Q"],
-            ["R", "S", "T", "X", "Y"],
-            ["Z", "A", "C", "H", "M"],
-            ["B", "D", "F", "I", "N"],
-            ["E", "G", "J", "L", "P"],
-            ["H", "K", "M", "Q", "S"],
-            ["T", "U", "V", "W", "Y"]
-        ],
-        // SET 3
-        set_3: [
-            ["E", "F", "P", "B", "R"],
-            ["A", "C", "G", "I", "K"],
-            ["D", "H", "J", "L", "M"],
-            ["N", "O", "Q", "S", "T"],
-            ["U", "V", "W", "X", "Z"],
-            ["B", "E", "H", "N", "U"],
-            ["C", "F", "I", "O", "V"],
-            ["D", "G", "J", "P", "W"],
-            ["K", "L", "Q", "R", "X"],
-            ["M", "S", "T", "Y", "Z"]
-        ],
-        // SET 4
-        set_4: [
-            ["C", "O", "G", "Q", "D"],
-            ["A", "B", "E", "H", "I"],
-            ["F", "J", "K", "L", "M"],
-            ["N", "P", "R", "S", "T"],
-            ["U", "V", "W", "X", "Y"],
-            ["Z", "A", "D", "G", "K"],
-            ["B", "C", "F", "H", "L"],
-            ["E", "I", "J", "M", "N"],
-            ["P", "Q", "R", "S", "V"],
-            ["T", "U", "W", "X", "Z"]
-        ],
-        // SET 5
-        set_5: [
-            ["X", "Y", "K", "V", "W"],
-            ["A", "B", "C", "D", "E"],
-            ["F", "G", "H", "I", "J"],
-            ["L", "M", "N", "O", "P"],
-            ["Q", "R", "S", "T", "U"],
-            ["Z", "A", "F", "L", "Q"],
-            ["B", "G", "M", "R", "V"],
-            ["C", "H", "N", "S", "W"],
-            ["D", "I", "O", "T", "X"],
-            ["E", "J", "P", "U", "Y"]
-        ],
-        // SET 6
-        set_6: [
-            ["H", "I", "T", "L", "F"],
-            ["A", "B", "C", "E", "G"],
-            ["D", "J", "K", "M", "N"],
-            ["O", "P", "Q", "R", "S"],
-            ["U", "V", "W", "X", "Y"],
-            ["Z", "A", "D", "H", "O"],
-            ["B", "C", "E", "I", "P"],
-            ["F", "G", "J", "L", "Q"],
-            ["K", "M", "N", "T", "R"],
-            ["S", "U", "V", "W", "X"]
-        ],
-        // SET 7
-        set_7: [
-            ["A", "V", "W", "M", "N"],
-            ["B", "C", "D", "E", "F"],
-            ["G", "H", "I", "J", "K"],
-            ["L", "O", "P", "Q", "R"],
-            ["S", "T", "U", "X", "Y"],
-            ["Z", "A", "G", "L", "S"],
-            ["B", "H", "M", "T", "V"],
-            ["C", "I", "N", "U", "W"],
-            ["D", "J", "O", "X", "M"],
-            ["E", "F", "P", "Y", "N"]
-        ],
-        // SET 8
-        set_8: [
-            ["J", "U", "O", "C", "G"],
-            ["A", "B", "D", "E", "H"],
-            ["F", "I", "K", "L", "M"],
-            ["N", "P", "Q", "R", "S"],
-            ["T", "V", "W", "X", "Y"],
-            ["Z", "A", "F", "N", "T"],
-            ["B", "C", "G", "I", "V"],
-            ["D", "E", "H", "J", "W"],
-            ["K", "L", "O", "P", "X"],
-            ["M", "Q", "R", "S", "Y"]
-        ],
-        // SET 9
-        set_9: [
-            ["Z", "N", "M", "W", "K"],
-            ["A", "B", "C", "D", "E"],
-            ["F", "G", "H", "I", "J"],
-            ["L", "O", "P", "Q", "R"],
-            ["S", "T", "U", "V", "X"],
-            ["Y", "A", "F", "L", "S"],
-            ["B", "G", "H", "O", "T"],
-            ["C", "I", "P", "U", "Z"],
-            ["D", "J", "Q", "V", "N"],
-            ["E", "K", "R", "X", "M"]
-        ],
-        // SET 10
-        set_10: [
-            ["S", "Z", "E", "F", "B"],
-            ["A", "C", "D", "G", "H"],
-            ["I", "J", "K", "L", "M"],
-            ["N", "O", "P", "Q", "R"],
-            ["T", "U", "V", "W", "Y"],
-            ["X", "A", "I", "N", "T"],
-            ["B", "C", "E", "J", "O"],
-            ["D", "F", "K", "P", "U"],
-            ["G", "H", "L", "Q", "V"],
-            ["M", "R", "S", "W", "Z"]
-        ]
-    };
+}
 
-    let MASTER_BANK = [];
-    let currentIdx = 0, timerLeft = 60, interval = null, results = [], pName = "", activeChars = [];
 
-    function startLogin() {
-        const u = document.getElementById('username').value.trim();
-        const p = document.getElementById('password').value.trim();
-        const statusDiv = document.getElementById('loginStatus');
+/* =========================================================
+   SHUFFLE
+   ========================================================= */
 
-        statusDiv.textContent = "";
+function shuffleArray(array){
 
-        if (!u || !p) {
-            statusDiv.textContent = 'Nama dan Password wajib diisi!';
-            return;
-        }
+    let arr = [...array];
 
-        if (p !== MASTER_PASSWORD) {
-            statusDiv.textContent = 'Password salah!';
-            return;
-        }
+    for(let i = arr.length - 1; i > 0; i--){
 
-        const btn = document.getElementById('btnLogin');
-        btn.disabled = true;
-        btn.textContent = 'MENGECEK SESI...';
+        const j =
+            Math.floor(Math.random() * (i + 1));
 
-        fetch(GAS_ENDPOINT, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'login', username: u })
-        }).then(() => {
+        [arr[i], arr[j]] =
+            [arr[j], arr[i]];
+
+    }
+
+    return arr;
+}
+
+
+/* =========================================================
+   DATABASE 10 SET x 10 KOLOM
+   ========================================================= */
+
+const BANK_DATABASE = {
+
+    set_1: [
+        ["B","D","P","R","Q"],
+        ["A","C","E","F","H"],
+        ["J","K","L","M","N"],
+        ["S","T","V","W","Z"],
+        ["G","I","O","U","Y"],
+        ["X","B","F","K","P"],
+        ["C","D","G","L","Q"],
+        ["E","H","M","R","V"],
+        ["I","J","N","S","W"],
+        ["T","U","X","Y","Z"]
+    ],
+
+    set_2: [
+        ["M","N","W","V","U"],
+        ["A","B","D","E","F"],
+        ["C","G","H","I","J"],
+        ["K","L","O","P","Q"],
+        ["R","S","T","X","Y"],
+        ["Z","A","C","H","M"],
+        ["B","D","F","I","N"],
+        ["E","G","J","L","P"],
+        ["H","K","M","Q","S"],
+        ["T","U","V","W","Y"]
+    ],
+
+    set_3: [
+        ["E","F","P","B","R"],
+        ["A","C","G","I","K"],
+        ["D","H","J","L","M"],
+        ["N","O","Q","S","T"],
+        ["U","V","W","X","Z"],
+        ["B","E","H","N","U"],
+        ["C","F","I","O","V"],
+        ["D","G","J","P","W"],
+        ["K","L","Q","R","X"],
+        ["M","S","T","Y","Z"]
+    ],
+
+    set_4: [
+        ["C","O","G","Q","D"],
+        ["A","B","E","H","I"],
+        ["F","J","K","L","M"],
+        ["N","P","R","S","T"],
+        ["U","V","W","X","Y"],
+        ["Z","A","D","G","K"],
+        ["B","C","F","H","L"],
+        ["E","I","J","M","N"],
+        ["P","Q","R","S","V"],
+        ["T","U","W","X","Z"]
+    ],
+
+    set_5: [
+        ["X","Y","K","V","W"],
+        ["A","B","C","D","E"],
+        ["F","G","H","I","J"],
+        ["L","M","N","O","P"],
+        ["Q","R","S","T","U"],
+        ["Z","A","F","L","Q"],
+        ["B","G","M","R","V"],
+        ["C","H","N","S","W"],
+        ["D","I","O","T","X"],
+        ["E","J","P","U","Y"]
+    ],
+
+    set_6: [
+        ["H","I","T","L","F"],
+        ["A","B","C","E","G"],
+        ["D","J","K","M","N"],
+        ["O","P","Q","R","S"],
+        ["U","V","W","X","Y"],
+        ["Z","A","D","H","O"],
+        ["B","C","E","I","P"],
+        ["F","G","J","L","Q"],
+        ["K","M","N","T","R"],
+        ["S","U","V","W","X"]
+    ],
+
+    set_7: [
+        ["A","V","W","M","N"],
+        ["B","C","D","E","F"],
+        ["G","H","I","J","K"],
+        ["L","O","P","Q","R"],
+        ["S","T","U","X","Y"],
+        ["Z","A","G","L","S"],
+        ["B","H","M","T","V"],
+        ["C","I","N","U","W"],
+        ["D","J","O","X","M"],
+        ["E","F","P","Y","N"]
+    ],
+
+    set_8: [
+        ["J","U","O","C","G"],
+        ["A","B","D","E","H"],
+        ["F","I","K","L","M"],
+        ["N","P","Q","R","S"],
+        ["T","V","W","X","Y"],
+        ["Z","A","F","N","T"],
+        ["B","C","G","I","V"],
+        ["D","E","H","J","W"],
+        ["K","L","O","P","X"],
+        ["M","Q","R","S","Y"]
+    ],
+
+    set_9: [
+        ["Z","N","M","W","K"],
+        ["A","B","C","D","E"],
+        ["F","G","H","I","J"],
+        ["L","O","P","Q","R"],
+        ["S","T","U","V","X"],
+        ["Y","A","F","L","S"],
+        ["B","G","H","O","T"],
+        ["C","I","P","U","Z"],
+        ["D","J","Q","V","N"],
+        ["E","K","R","X","M"]
+    ],
+
+    set_10: [
+        ["S","Z","E","F","B"],
+        ["A","C","D","G","H"],
+        ["I","J","K","L","M"],
+        ["N","O","P","Q","R"],
+        ["T","U","V","W","Y"],
+        ["X","A","I","N","T"],
+        ["B","C","E","J","O"],
+        ["D","F","K","P","U"],
+        ["G","H","L","Q","V"],
+        ["M","R","S","W","Z"]
+    ]
+
+};
+
+
+/* =========================================================
+   VARIABLE
+   ========================================================= */
+
+let MASTER_BANK = [];
+
+let currentIdx = 0;
+
+let timerLeft = 60;
+
+let interval = null;
+
+let results = [];
+
+let pName = "";
+
+let activeChars = [];
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+async function startLogin(){
+
+    const u =
+        document.getElementById('username').value.trim();
+
+    const p =
+        document.getElementById('password').value.trim();
+
+    const statusDiv =
+        document.getElementById('loginStatus');
+
+    const btn =
+        document.getElementById('btnLogin');
+
+
+    statusDiv.textContent = "";
+
+
+    if(!u || !p){
+
+        statusDiv.textContent =
+            "Nama dan Password wajib diisi!";
+
+        return;
+    }
+
+
+    btn.disabled = true;
+
+    btn.textContent =
+        "MENGECEK SESI...";
+
+
+    const deviceId =
+        getDeviceId();
+
+
+    try{
+
+        const url =
+            GAS_ENDPOINT +
+            "?password=" +
+            encodeURIComponent(p) +
+            "&deviceId=" +
+            encodeURIComponent(deviceId);
+
+
+        const response =
+            await fetch(url);
+
+
+        const result =
+            await response.json();
+
+
+        if(result.status === "success"){
+
             proceedToTest(u);
-        }).catch(() => {
-            proceedToTest(u);
-        });
+
+        }else{
+
+            statusDiv.textContent =
+                result.message ||
+                "Password tidak dapat digunakan.";
+
+            btn.disabled = false;
+
+            btn.textContent =
+                "MULAI SIMULASI";
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        statusDiv.textContent =
+            "Gagal terhubung ke sistem. Coba lagi.";
+
+        btn.disabled = false;
+
+        btn.textContent =
+            "MULAI SIMULASI";
+
     }
 
-    function proceedToTest(userName) {
-        const katKey = document.getElementById('kategoriSoal').value;
-        MASTER_BANK = BANK_DATABASE[katKey].map(set => shuffleArray(set));
-        MASTER_BANK = shuffleArray(MASTER_BANK);
-        
-        pName = userName;
-        document.getElementById('loginBox').style.display = 'none';
-        triggerCountdown();
-    }
+}
 
-    function triggerCountdown() {
-        document.getElementById('testArea').style.display = 'none';
-        const overlay = document.getElementById('prepOverlay');
-        const countText = document.getElementById('countdownText');
-        overlay.style.display = 'flex';
-        let count = 3; countText.textContent = count;
-        let t = setInterval(() => {
-            count--; 
-            if (count > 0) countText.textContent = count;
-            else { clearInterval(t); overlay.style.display = 'none'; startCol(); }
-        }, 1000);
-    }
 
-    function startCol() {
-        activeChars = shuffleArray([...MASTER_BANK[currentIdx]]);
-        timerLeft = 60;
-        if (!results[currentIdx]) results.push({t: 0, b: 0, s: 0});
-        
-        document.getElementById('topRow').style.display = 'flex';
-        document.getElementById('testArea').style.display = 'flex';
-        document.getElementById('kolomInfo').textContent = `KOLOM: ${currentIdx + 1} / 10`;
-        
-        document.getElementById('topRow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+/* =========================================================
+   MASUK KE TEST
+   ========================================================= */
 
-        let hSimbol = '', hLabel = '';
-        activeChars.forEach((c, i) => {
-            hSimbol += `<td><span>${c}</span></td>`;
-            hLabel += `<td class="label">${String.fromCharCode(65 + i)}</td>`;
-        });
-        document.getElementById('rowSimbol').innerHTML = hSimbol;
-        document.getElementById('rowLabel').innerHTML = hLabel;
+function proceedToTest(userName){
 
-        nextSoal();
-        if (interval) clearInterval(interval);
-        interval = setInterval(() => {
-            timerLeft--;
-            document.getElementById('timer').textContent = `00:${String(timerLeft).padStart(2, '0')}`;
-            if (timerLeft <= 0) {
-                clearInterval(interval);
-                currentIdx++;
-                if (currentIdx < 10) triggerCountdown(); else showFinal();
+    const katKey =
+        document.getElementById('kategoriSoal').value;
+
+
+    MASTER_BANK =
+        BANK_DATABASE[katKey]
+        .map(set => shuffleArray(set));
+
+
+    MASTER_BANK =
+        shuffleArray(MASTER_BANK);
+
+
+    pName =
+        userName;
+
+
+    document.getElementById('loginBox')
+        .style.display = 'none';
+
+
+    triggerCountdown();
+
+}
+
+
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+
+function triggerCountdown(){
+
+    document.getElementById('testArea')
+        .style.display = 'none';
+
+
+    const overlay =
+        document.getElementById('prepOverlay');
+
+
+    const countText =
+        document.getElementById('countdownText');
+
+
+    overlay.style.display =
+        'flex';
+
+
+    let count = 3;
+
+    countText.textContent =
+        count;
+
+
+    let t =
+        setInterval(() => {
+
+            count--;
+
+            if(count > 0){
+
+                countText.textContent =
+                    count;
+
+            }else{
+
+                clearInterval(t);
+
+                overlay.style.display =
+                    'none';
+
+                startCol();
+
             }
-        }, 1000);
-    }
 
-    function nextSoal() {
-        const missingIdx = Math.floor(Math.random() * 5);
-        const correctLabel = String.fromCharCode(65 + missingIdx);
-        
-        const remainingChars = activeChars.filter((_, i) => i !== missingIdx);
-        const display = shuffleArray(remainingChars);
-        
-        const soalCont = document.getElementById('soalCont');
-        soalCont.innerHTML = display.map(s => `<span>${s}</span>`).join('');
-        
-        const cont = document.getElementById('pilihan');
-        cont.innerHTML = '';
-        ['A', 'B', 'C', 'D', 'E'].forEach(l => {
-            const btn = document.createElement('button');
-            btn.className = 'pilihan-btn'; btn.textContent = l;
-            btn.onclick = () => { 
-                results[currentIdx].t++; 
-                if (l === correctLabel) results[currentIdx].b++; else results[currentIdx].s++; 
-                nextSoal(); 
-            };
-            cont.appendChild(btn);
+        },1000);
+
+}
+
+
+/* =========================================================
+   START KOLOM
+   ========================================================= */
+
+function startCol(){
+
+    activeChars =
+        shuffleArray([
+            ...MASTER_BANK[currentIdx]
+        ]);
+
+
+    timerLeft = 60;
+
+
+    if(!results[currentIdx]){
+
+        results.push({
+            t:0,
+            b:0,
+            s:0
         });
+
     }
 
-    function showFinal() {
-        document.getElementById('testArea').style.display = 'none';
-        document.getElementById('topRow').style.display = 'none';
-        document.getElementById('resultArea').style.display = 'block';
-        document.getElementById('resName').textContent = pName;
 
-        document.getElementById('mainHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('topRow')
+        .style.display = 'flex';
 
-        const terjawab = results.map(r => r.t);
-        const totalB = results.reduce((a, b) => a + b.b, 0);
-        const totalS = results.reduce((a, b) => a + b.s, 0);
-        const minK = Math.min(...terjawab);
-        const maxK = Math.max(...terjawab);
-        const range = maxK - minK;
-        const skorTotal = ((totalB / 500) * 100).toFixed(2);
-        const nilaiFix = (skorTotal * 0.4).toFixed(2);
 
-        document.getElementById('summaryBox').innerHTML = `
-            <div class="card-skor"><b>KECEPATAN (MIN)</b><div class="val-skor">${minK}</div><span class="kat-badge ${minK>=20?'bg-sukses':'bg-bahaya'}">${minK>=20?'BAIK':'KURANG'}</span></div>
-            <div class="card-skor"><b>KETELITIAN (SALAH)</b><div class="val-skor">${totalS}</div><span class="kat-badge ${totalS<=5?'bg-sukses':'bg-bahaya'}">${totalS<=5?'TELITI':'RENDAH'}</span></div>
-            <div class="card-skor"><b>KESTABILAN (RANGE)</b><div class="val-skor">${range}</div><span class="kat-badge ${range<=5?'bg-sukses':'bg-bahaya'}">${range<=5?'STABIL':'LABIL'}</span></div>
-            <div class="card-skor"><b>SKOR TOTAL</b><div class="val-skor">${skorTotal}</div></div>
-            <div class="card-akhir card-skor"><b>NILAI AKHIR (X0.4)</b><div class="val-skor">${nilaiFix}</div></div>
+    document.getElementById('testArea')
+        .style.display = 'flex';
+
+
+    document.getElementById('kolomInfo')
+        .textContent =
+        `KOLOM: ${currentIdx + 1} / 10`;
+
+
+    document.getElementById('topRow')
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+
+
+    let hSimbol = '';
+
+    let hLabel = '';
+
+
+    activeChars.forEach((c,i)=>{
+
+        hSimbol +=
+            `<td><span>${c}</span></td>`;
+
+        hLabel +=
+            `<td class="label">${String.fromCharCode(65+i)}</td>`;
+
+    });
+
+
+    document.getElementById('rowSimbol')
+        .innerHTML = hSimbol;
+
+
+    document.getElementById('rowLabel')
+        .innerHTML = hLabel;
+
+
+    nextSoal();
+
+
+    if(interval)
+        clearInterval(interval);
+
+
+    interval =
+        setInterval(()=>{
+
+            timerLeft--;
+
+
+            document.getElementById('timer')
+                .textContent =
+                `00:${String(timerLeft).padStart(2,'0')}`;
+
+
+            if(timerLeft <= 0){
+
+                clearInterval(interval);
+
+                currentIdx++;
+
+
+                if(currentIdx < 10){
+
+                    triggerCountdown();
+
+                }else{
+
+                    showFinal();
+
+                }
+
+            }
+
+        },1000);
+
+}
+
+
+/* =========================================================
+   SOAL BERIKUTNYA
+   ========================================================= */
+
+function nextSoal(){
+
+    const missingIdx =
+        Math.floor(Math.random() * 5);
+
+
+    const correctLabel =
+        String.fromCharCode(65 + missingIdx);
+
+
+    const remainingChars =
+        activeChars.filter(
+            (_,i) => i !== missingIdx
+        );
+
+
+    const display =
+        shuffleArray(remainingChars);
+
+
+    const soalCont =
+        document.getElementById('soalCont');
+
+
+    soalCont.innerHTML =
+        display
+        .map(s => `<span>${s}</span>`)
+        .join('');
+
+
+    const cont =
+        document.getElementById('pilihan');
+
+
+    cont.innerHTML = '';
+
+
+    ['A','B','C','D','E']
+    .forEach(l=>{
+
+        const btn =
+            document.createElement('button');
+
+
+        btn.className =
+            'pilihan-btn';
+
+
+        btn.textContent =
+            l;
+
+
+        btn.onclick = ()=>{
+
+            results[currentIdx].t++;
+
+
+            if(l === correctLabel){
+
+                results[currentIdx].b++;
+
+            }else{
+
+                results[currentIdx].s++;
+
+            }
+
+
+            nextSoal();
+
+        };
+
+
+        cont.appendChild(btn);
+
+    });
+
+}
+
+
+/* =========================================================
+   HASIL AKHIR
+   ========================================================= */
+
+function showFinal(){
+
+    document.getElementById('testArea')
+        .style.display = 'none';
+
+
+    document.getElementById('topRow')
+        .style.display = 'none';
+
+
+    document.getElementById('resultArea')
+        .style.display = 'block';
+
+
+    document.getElementById('resName')
+        .textContent = pName;
+
+
+    document.getElementById('mainHeader')
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+
+
+    const terjawab =
+        results.map(r => r.t);
+
+
+    const totalB =
+        results.reduce(
+            (a,b) => a + b.b,
+            0
+        );
+
+
+    const totalS =
+        results.reduce(
+            (a,b) => a + b.s,
+            0
+        );
+
+
+    const minK =
+        Math.min(...terjawab);
+
+
+    const maxK =
+        Math.max(...terjawab);
+
+
+    const range =
+        maxK - minK;
+
+
+    const skorTotal =
+        ((totalB / 500) * 100)
+        .toFixed(2);
+
+
+    const nilaiFix =
+        (skorTotal * 0.4)
+        .toFixed(2);
+
+
+    document.getElementById('summaryBox')
+        .innerHTML = `
+
+        <div class="card-skor">
+            <b>KECEPATAN (MIN)</b>
+            <div class="val-skor">${minK}</div>
+            <span class="kat-badge ${minK>=20?'bg-sukses':'bg-bahaya'}">
+                ${minK>=20?'BAIK':'KURANG'}
+            </span>
+        </div>
+
+        <div class="card-skor">
+            <b>KETELITIAN (SALAH)</b>
+            <div class="val-skor">${totalS}</div>
+            <span class="kat-badge ${totalS<=5?'bg-sukses':'bg-bahaya'}">
+                ${totalS<=5?'TELITI':'RENDAH'}
+            </span>
+        </div>
+
+        <div class="card-skor">
+            <b>KESTABILAN (RANGE)</b>
+            <div class="val-skor">${range}</div>
+            <span class="kat-badge ${range<=5?'bg-sukses':'bg-bahaya'}">
+                ${range<=5?'STABIL':'LABIL'}
+            </span>
+        </div>
+
+        <div class="card-skor">
+            <b>SKOR TOTAL</b>
+            <div class="val-skor">${skorTotal}</div>
+        </div>
+
+        <div class="card-akhir card-skor">
+            <b>NILAI AKHIR (X0.4)</b>
+            <div class="val-skor">${nilaiFix}</div>
+        </div>
+
+    `;
+
+
+    let narasi =
+        `Berdasarkan hasil simulasi, saudara ${pName} memiliki kecepatan kerja minimal ${minK} soal/menit. `;
+
+
+    narasi +=
+        totalS <= 5
+        ? "Tingkat ketelitian Anda sangat baik (High Precision). "
+        : "Anda perlu melatih ketelitian karena ditemukan kesalahan di atas ambang batas. ";
+
+
+    narasi +=
+        range <= 5
+        ? "Grafik menunjukkan stabilitas emosi dan daya tahan stres yang sangat baik."
+        : "Grafik fluktuatif menunjukkan adanya penurunan konsentrasi pada periode tertentu.";
+
+
+    document.getElementById('kesimpulanNarasi')
+        .textContent = narasi;
+
+
+    let h = '';
+
+
+    results.forEach((r,i)=>{
+
+        let fluk =
+            i === 0
+            ? 0
+            : r.t - results[i-1].t;
+
+
+        h += `
+            <tr>
+                <td>${i+1}</td>
+                <td>${r.t}</td>
+                <td>${r.b}</td>
+                <td>${r.s}</td>
+                <td>${fluk > 0 ? '+'+fluk : fluk}</td>
+            </tr>
         `;
 
-        let narasi = `Berdasarkan hasil simulasi, saudara ${pName} memiliki kecepatan kerja minimal ${minK} soal/menit. `;
-        narasi += totalS <= 5 ? "Tingkat ketelitian Anda sangat baik (High Precision). " : "Anda perlu melatih ketelitian karena ditemukan kesalahan di atas ambang batas. ";
-        narasi += range <= 5 ? "Grafik menunjukkan stabilitas emosi dan daya tahan stres yang sangat baik." : "Grafik fluktuatif menunjukkan adanya penurunan konsentrasi pada periode tertentu.";
-        document.getElementById('kesimpulanNarasi').textContent = narasi;
+    });
 
-        let h = '';
-        results.forEach((r, i) => { 
-            let fluk = i === 0 ? 0 : r.t - results[i-1].t;
-            h += `<tr><td>${i+1}</td><td>${r.t}</td><td>${r.b}</td><td>${r.s}</td><td>${fluk > 0 ? '+'+fluk : fluk}</td></tr>`; 
-        });
-        document.getElementById('tbodyHasil').innerHTML = h;
 
-        new Chart(document.getElementById('chartPauli'), {
-            type: 'line',
-            data: {
-                labels: [1,2,3,4,5,6,7,8,9,10],
-                datasets: [{ label: 'Kecepatan', data: terjawab, borderColor: '#0b2340', tension: 0.3, fill: true, backgroundColor: 'rgba(11,35,64,0.1)' }]
+    document.getElementById('tbodyHasil')
+        .innerHTML = h;
+
+
+    new Chart(
+        document.getElementById('chartPauli'),
+        {
+            type:'line',
+
+            data:{
+                labels:[
+                    1,2,3,4,5,
+                    6,7,8,9,10
+                ],
+
+                datasets:[{
+                    label:'Kecepatan',
+                    data:terjawab,
+                    borderColor:'#0b2340',
+                    tension:.3,
+                    fill:true,
+                    backgroundColor:'rgba(11,35,64,0.1)'
+                }]
             },
-            options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+
+            options:{
+                maintainAspectRatio:false,
+
+                plugins:{
+                    legend:{
+                        display:false
+                    }
+                }
+            }
+        }
+    );
+
+
+    /* SIMPAN HASIL */
+    fetch(GAS_ENDPOINT,{
+
+        method:'POST',
+
+        mode:'no-cors',
+
+        headers:{
+            'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+
+            action:'submit',
+
+            username:pName,
+
+            skor:skorTotal,
+
+            nilai:nilaiFix,
+
+            detail:results
+
+        })
+
+    }).catch(
+        err => console.log(err)
+    );
+
+}
+
+
+/* =========================================================
+   KEMBALI PILIH SET
+   ========================================================= */
+
+function backToMenu(){
+
+    currentIdx = 0;
+
+    results = [];
+
+
+    if(interval)
+        clearInterval(interval);
+
+
+    document.getElementById('resultArea')
+        .style.display = 'none';
+
+
+    document.getElementById('testArea')
+        .style.display = 'none';
+
+
+    document.getElementById('topRow')
+        .style.display = 'none';
+
+
+    document.getElementById('loginBox')
+        .style.display = 'block';
+
+
+    const btn =
+        document.getElementById('btnLogin');
+
+
+    btn.disabled = false;
+
+    btn.textContent =
+        'MULAI SIMULASI';
+
+
+    document.getElementById('password')
+        .value = '';
+
+
+    document.getElementById('loginStatus')
+        .textContent = '';
+
+
+    document.getElementById('mainHeader')
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
         });
 
-        fetch(GAS_ENDPOINT, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'submit', username: pName, skor: skorTotal, nilai: nilaiFix, detail: results })
-        }).catch(err => console.log(err));
-    }
+}
 
-    function backToMenu() {
-        currentIdx = 0;
-        results = [];
-        if (interval) clearInterval(interval);
 
-        document.getElementById('resultArea').style.display = 'none';
-        document.getElementById('testArea').style.display = 'none';
-        document.getElementById('topRow').style.display = 'none';
-        document.getElementById('loginBox').style.display = 'block';
+/* =========================================================
+   DOWNLOAD PDF
+   ========================================================= */
 
-        const btn = document.getElementById('btnLogin');
-        btn.disabled = false;
-        btn.textContent = 'MULAI SIMULASI';
-        document.getElementById('password').value = '';
-        document.getElementById('loginStatus').textContent = '';
+async function downloadFullPDF(){
 
-        document.getElementById('mainHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const btn =
+        document.getElementById('btnDownload');
 
-    async function downloadFullPDF() {
-        const btn = document.getElementById('btnDownload');
-        btn.style.display = 'none';
-        const element = document.getElementById('captureArea');
-        const canvas = await html2canvas(element, { scale: 2 });
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const w = pdf.internal.pageSize.getWidth();
-        const h = (canvas.height * w) / canvas.width;
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, w, h);
-        pdf.save(`Hasil_Kecermatan_${pName}.pdf`);
-        btn.style.display = 'block';
-    }
+
+    btn.style.display =
+        'none';
+
+
+    const element =
+        document.getElementById('captureArea');
+
+
+    const canvas =
+        await html2canvas(
+            element,
+            {
+                scale:2
+            }
+        );
+
+
+    const { jsPDF } =
+        window.jspdf;
+
+
+    const pdf =
+        new jsPDF(
+            'p',
+            'mm',
+            'a4'
+        );
+
+
+    const w =
+        pdf.internal.pageSize.getWidth();
+
+
+    const h =
+        (canvas.height * w) /
+        canvas.width;
+
+
+    pdf.addImage(
+        canvas.toDataURL('image/png'),
+        'PNG',
+        0,
+        0,
+        w,
+        h
+    );
+
+
+    pdf.save(
+        `Hasil_Kecermatan_${pName}.pdf`
+    );
+
+
+    btn.style.display =
+        'block';
+
+}
+
 </script>
+
 </body>
 </html>
