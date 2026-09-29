@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id" oncontextmenu="return false" onselectstart="return false" onkeydown="preventCopy(event)">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+
     <title>TRYOUT TES KECERMATAN HURUF KAPITAL ADVANCE - Persona Research & Consulting</title>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -18,283 +19,273 @@
             --btn-shadow: #cbd5e1;
         }
 
-        body { 
-            -webkit-user-select: none; 
+        body {
+            -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
-            user-select: none; 
-            margin: 0; 
-            font-family: 'Inter', 'Segoe UI', sans-serif; 
-            background: #e2e8f0; 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-            color: #071130; 
+            user-select: none;
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: #071130;
         }
 
         .wrap {
-            width: 100%; 
-            max-width: 980px; 
-            background: #fff; 
-            border-top: 6px solid var(--navy); 
-            border-radius: 12px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            margin: 10px; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
+            width: 100%;
+            max-width: 980px;
+            background: #fff;
+            border-top: 6px solid var(--navy);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
             min-height: 92vh;
             box-sizing: border-box;
         }
-        
-        header { text-align: center; margin-bottom: 10px; }
 
-        #loginBox { 
-            text-align: center; 
-            padding: 25px 20px; 
+        header {
+            text-align: center;
+            margin-bottom: 10px;
         }
 
-        input, select { 
-            padding: 12px; 
-            width: 320px; 
+        #loginBox {
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            width: 320px;
             max-width: 90%;
-            border: 2px solid #cbd5e1; 
-            border-radius: 8px; 
-            font-size: 15px; 
-            text-align: center; 
-            outline: none; 
-            margin-bottom: 12px; 
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 12px;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
 
-        .btn-start { 
-            background: var(--navy); 
-            color: #fff; 
-            border: none; 
-            padding: 12px 40px; 
-            border-radius: 8px; 
-            font-size: 16px; 
-            cursor: pointer; 
-            font-weight: 600; 
+        .btn-start {
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
             font-family: 'Inter', sans-serif;
         }
 
-        .btn-start:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
+        #prepOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.98);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
         }
 
-        #prepOverlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(255,255,255,0.98); 
-            display: none; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 1000; 
-            flex-direction: column; 
-            font-family: 'Inter', sans-serif;
+        #countdownText {
+            font-size: 120px;
+            font-weight: bold;
+            color: var(--navy);
         }
 
-        #countdownText { 
-            font-size: 120px; 
-            font-weight: bold; 
-            color: var(--navy); 
+        .top-row {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--gray);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
-        .top-row { 
-            display: none; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: var(--gray); 
-            padding: 10px 20px; 
-            border-radius: 10px; 
-            margin-bottom: 10px; 
-            font-family: 'Inter', sans-serif;
+        #timer {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--danger);
+            font-family: monospace;
         }
 
-        #timer { 
-            font-size: 24px; 
-            font-weight: 800; 
-            color: var(--danger); 
-            font-family: monospace; 
+        #testArea {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+            justify-content: center;
         }
 
-        #testArea { 
-            display: none; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 12px; 
-            flex-grow: 1; 
-            justify-content: center; 
+        .acuan-table {
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            table-layout: fixed;
+            width: 100%;
+            max-width: 500px;
         }
 
-        .acuan-table { 
-            border-collapse: collapse; 
-            margin-bottom: 5px; 
-            table-layout: fixed; 
-            width: 100%; 
-            max-width: 500px; 
-        }
-        
-        .acuan-table td { 
-            border: 2px solid var(--navy); 
-            height: 75px; 
-            text-align: center; 
-            background: #fff; 
-            vertical-align: middle; 
+        .acuan-table td {
+            border: 2px solid var(--navy);
+            height: 75px;
+            text-align: center;
+            background: #fff;
+            vertical-align: middle;
             padding: 4px;
             font-size: 38px;
             font-weight: 800;
             line-height: 1;
         }
-        
-        .acuan-table td span,
-        .soal-box span {
-            display: inline-block;
+
+        .acuan-table td.label {
+            background: var(--navy);
+            color: #fff;
+            font-size: 18px;
+            height: 30px;
+            font-weight: bold;
         }
 
-        .acuan-table td.label { 
-            background: var(--navy); 
-            color: #fff; 
-            font-size: 18px; 
-            height: 30px; 
-            font-weight: bold; 
-            font-family: 'Inter', sans-serif;
-        }
-
-        .soal-box { 
-            padding: 12px; 
-            background: var(--gray); 
-            border-radius: 15px; 
-            min-height: 80px; 
-            width: 100%; 
-            max-width: 500px; 
-            text-align: center; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 20px; 
+        .soal-box {
+            padding: 12px;
+            background: var(--gray);
+            border-radius: 15px;
+            min-height: 80px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
             box-sizing: border-box;
             font-size: 38px;
             font-weight: 800;
             line-height: 1;
             letter-spacing: 2px;
         }
-        
-        .pilihan-grid { 
-            display: grid; 
-            grid-template-columns: repeat(5, 1fr); 
-            gap: 10px; 
-            width: 100%; 
-            max-width: 500px; 
-            margin-bottom: 10px; 
+
+        .pilihan-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 10px;
         }
 
-        .pilihan-btn { 
-            background: #fff; 
-            border: 2px solid var(--navy); 
-            padding: 15px 0; 
-            font-size: 22px; 
-            font-weight: 700; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            box-shadow: 0 4px 0 var(--btn-shadow); 
+        .pilihan-btn {
+            background: #fff;
+            border: 2px solid var(--navy);
+            padding: 15px 0;
+            font-size: 22px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--btn-shadow);
             font-family: 'Inter', sans-serif;
         }
 
-        .pilihan-btn:active { 
-            transform: translateY(4px); 
-            box-shadow: none; 
+        .pilihan-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
         }
 
-        #resultArea { 
-            display: none; 
-            font-family: 'Inter', sans-serif; 
+        #resultArea {
+            display: none;
         }
 
-        .summary-cards { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 10px; 
-            margin: 20px 0; 
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
         }
 
-        .card-skor { 
-            background: #f8fafc; 
-            padding: 15px; 
-            border-radius: 10px; 
-            text-align: center; 
-            border: 1px solid #e2e8f0; 
+        .card-skor {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
         }
 
-        .card-skor b { 
-            display: block; 
-            font-size: 11px; 
-            color: #64748b; 
-            margin-bottom: 5px; 
-            text-transform: uppercase; 
+        .card-skor b {
+            display: block;
+            font-size: 11px;
+            color: #64748b;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .val-skor { 
-            font-size: 28px; 
-            font-weight: 900; 
-            color: var(--navy); 
-            line-height: 1; 
+        .val-skor {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1;
         }
 
-        .card-akhir { 
-            grid-column: span 2; 
-            background: var(--navy) !important; 
-            color: #fff !important; 
+        .card-akhir {
+            grid-column: span 2;
+            background: var(--navy) !important;
+            color: #fff !important;
         }
 
-        .card-akhir .val-skor { 
-            color: var(--gold); 
-            font-size: 42px; 
-        }
-        
-        .table-res { 
-            width: 100%; 
-            border-collapse: collapse; 
-            font-size: 11px; 
-            margin-top: 15px; 
+        .card-akhir .val-skor {
+            color: var(--gold);
+            font-size: 42px;
         }
 
-        .table-res th, 
-        .table-res td { 
-            border: 1px solid #cbd5e1; 
-            padding: 8px; 
-            text-align: center; 
+        .table-res {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 15px;
         }
 
-        .table-res th { 
-            background: var(--navy); 
-            color: #fff; 
+        .table-res th,
+        .table-res td {
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            text-align: center;
         }
 
-        .kat-badge { 
-            display: inline-block; 
-            padding: 3px 8px; 
-            border-radius: 15px; 
-            font-size: 9px; 
-            font-weight: bold; 
-            margin-top: 5px; 
-            text-transform: uppercase; 
+        .table-res th {
+            background: var(--navy);
+            color: #fff;
         }
 
-        .bg-sukses { 
-            background: #dcfce7; 
-            color: #166534; 
+        .kat-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 9px;
+            font-weight: bold;
+            margin-top: 5px;
+            text-transform: uppercase;
         }
 
-        .bg-bahaya { 
-            background: #fee2e2; 
-            color: #991b1b; 
+        .bg-sukses {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .bg-bahaya {
+            background: #fee2e2;
+            color: #991b1b;
         }
 
         .btn-restart {
@@ -317,17 +308,33 @@
             font-size: 13px;
             color: #64748b;
             border-top: 1px solid #e2e8f0;
-            font-family: 'Inter', sans-serif;
         }
 
-        footer a { 
-            color: #25d366; 
-            font-weight: bold; 
-            text-decoration: none; 
+        footer a {
+            color: #25d366;
+            font-weight: bold;
+            text-decoration: none;
         }
 
-        footer a:hover { 
-            text-decoration: underline; 
+        @media(max-width:600px) {
+            .wrap {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+
+            .acuan-table td {
+                height: 60px;
+                font-size: 30px;
+            }
+
+            .soal-box {
+                font-size: 30px;
+            }
+
+            #countdownText {
+                font-size: 90px;
+            }
         }
     </style>
 </head>
@@ -337,77 +344,116 @@
 <div class="wrap" id="captureArea">
 
     <header id="mainHeader">
-        <h1 style="font-size: 20px; color: var(--navy); margin: 0;">
+
+        <h1 style="font-size:20px;color:var(--navy);margin:0;">
             TRYOUT TES KECERMATAN HURUF KAPITAL ADVANCE
         </h1>
 
-        <p style="font-size: 12px; color: #64748b; margin: 4px 0 0 0; font-weight: 600;">
+        <p style="font-size:12px;color:#64748b;margin:4px 0 0;font-weight:600;">
             Persona Research & Consulting
         </p>
+
     </header>
 
-    <!-- LOGIN -->
+
+    <!-- =========================
+         PILIH NAMA & SET
+         TANPA PASSWORD
+         ========================= -->
+
     <div id="loginBox">
 
-        <input 
-            type="text" 
-            id="username" 
-            placeholder="Nama Lengkap Siswa..." 
+        <input
+            type="text"
+            id="username"
+            placeholder="Nama Lengkap Siswa..."
             autocomplete="off"
-        ><br>
+        >
 
-        <input 
-            type="password" 
-            id="password" 
-            placeholder="Password Sesi / Master..." 
-            autocomplete="off"
-        ><br>
+        <br>
 
         <select id="kategoriSoal">
-            <option value="set_1">🔣 Set 1: Variasi Kombinasi Utama A</option>
-            <option value="set_2">🔣 Set 2: Variasi Kombinasi Utama B</option>
-            <option value="set_3">🔣 Set 3: Variasi Kombinasi Utama C</option>
-            <option value="set_4">🔣 Set 4: Variasi Kombinasi Utama D</option>
-            <option value="set_5">🔣 Set 5: Variasi Kombinasi Utama E</option>
-            <option value="set_6">🔣 Set 6: Variasi Kombinasi Utama F</option>
-            <option value="set_7">🔣 Set 7: Variasi Kombinasi Utama G</option>
-            <option value="set_8">🔣 Set 8: Variasi Kombinasi Utama H</option>
-            <option value="set_9">🔣 Set 9: Variasi Kombinasi Utama I</option>
-            <option value="set_10">🔣 Set 10: Variasi Kombinasi Utama J</option>
-        </select><br>
 
-        <button 
-            class="btn-start" 
-            id="btnLogin" 
+            <option value="set_1">
+                🔣 Set 1: Variasi Kombinasi Utama A
+            </option>
+
+            <option value="set_2">
+                🔣 Set 2: Variasi Kombinasi Utama B
+            </option>
+
+            <option value="set_3">
+                🔣 Set 3: Variasi Kombinasi Utama C
+            </option>
+
+            <option value="set_4">
+                🔣 Set 4: Variasi Kombinasi Utama D
+            </option>
+
+            <option value="set_5">
+                🔣 Set 5: Variasi Kombinasi Utama E
+            </option>
+
+            <option value="set_6">
+                🔣 Set 6: Variasi Kombinasi Utama F
+            </option>
+
+            <option value="set_7">
+                🔣 Set 7: Variasi Kombinasi Utama G
+            </option>
+
+            <option value="set_8">
+                🔣 Set 8: Variasi Kombinasi Utama H
+            </option>
+
+            <option value="set_9">
+                🔣 Set 9: Variasi Kombinasi Utama I
+            </option>
+
+            <option value="set_10">
+                🔣 Set 10: Variasi Kombinasi Utama J
+            </option>
+
+        </select>
+
+        <br>
+
+        <button
+            class="btn-start"
+            id="btnLogin"
             onclick="startLogin()"
         >
             MULAI SIMULASI
         </button>
 
-        <div 
-            id="loginStatus" 
-            style="margin-top: 10px; font-size: 13px; font-weight: bold; color: var(--danger);"
+        <div
+            id="loginStatus"
+            style="margin-top:10px;font-size:13px;font-weight:bold;color:var(--danger);"
         ></div>
 
     </div>
 
 
     <!-- COUNTDOWN -->
+
     <div id="prepOverlay">
 
-        <div style="font-size: 18px; margin-bottom: 10px; color: #64748b;">
+        <div style="font-size:18px;margin-bottom:10px;color:#64748b;">
             FOKUS PADA KARAKTER HURUF KAPITAL...
         </div>
 
-        <div id="countdownText">3</div>
+        <div id="countdownText">
+            3
+        </div>
 
     </div>
 
 
     <!-- TOP ROW -->
+
     <div class="top-row" id="topRow">
 
-        <div id="kolomInfo" style="font-weight: bold;">
+        <div id="kolomInfo" style="font-weight:bold;">
             KOLOM: 1 / 10
         </div>
 
@@ -419,6 +465,7 @@
 
 
     <!-- TEST -->
+
     <div id="testArea">
 
         <table class="acuan-table">
@@ -429,7 +476,6 @@
 
         </table>
 
-
         <div class="soal-box" id="soalCont"></div>
 
         <div id="pilihan" class="pilihan-grid"></div>
@@ -438,30 +484,31 @@
 
 
     <!-- RESULT -->
+
     <div id="resultArea">
 
-        <h2 style="text-align: center; font-size: 18px; margin-bottom: 5px;">
+        <h2 style="text-align:center;font-size:18px;margin-bottom:5px;">
             LAPORAN HASIL AKHIR
         </h2>
 
-        <p 
-            id="resName" 
-            style="text-align: center; font-weight: 900; font-size: 22px; color: var(--navy); margin: 0 0 15px 0; border-bottom: 2px solid var(--navy); padding-bottom: 10px; text-transform: uppercase;"
+        <p
+            id="resName"
+            style="text-align:center;font-weight:900;font-size:22px;color:var(--navy);margin:0 0 15px;border-bottom:2px solid var(--navy);padding-bottom:10px;text-transform:uppercase;"
         ></p>
 
 
         <div id="summaryBox" class="summary-cards"></div>
 
 
-        <div style="background: #f1f5f9; padding: 15px; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 15px;">
+        <div style="background:#f1f5f9;padding:15px;border-radius:10px;border:1px solid #cbd5e1;margin-bottom:15px;">
 
-            <b style="color: var(--navy); font-size: 13px;">
+            <b style="color:var(--navy);font-size:13px;">
                 ANALISA HASIL / INTERPRETASI:
             </b>
 
-            <div 
-                id="kesimpulanNarasi" 
-                style="margin-top: 8px; line-height: 1.5; font-size: 12px; color: #334155;"
+            <div
+                id="kesimpulanNarasi"
+                style="margin-top:8px;line-height:1.5;font-size:12px;color:#334155;"
             ></div>
 
         </div>
@@ -470,6 +517,7 @@
         <table class="table-res">
 
             <thead>
+
                 <tr>
                     <th>Kolom</th>
                     <th>Terjawab</th>
@@ -477,6 +525,7 @@
                     <th>Salah</th>
                     <th>+/-</th>
                 </tr>
+
             </thead>
 
             <tbody id="tbodyHasil"></tbody>
@@ -484,22 +533,24 @@
         </table>
 
 
-        <div style="margin-top: 20px; height: 200px; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px;">
+        <div style="margin-top:20px;height:200px;border:1px solid #e2e8f0;padding:10px;border-radius:8px;">
+
             <canvas id="chartPauli"></canvas>
+
         </div>
 
 
-        <button 
-            id="btnDownload" 
-            style="background: #27ae60; color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;" 
+        <button
+            id="btnDownload"
+            style="background:#27ae60;color:#fff;border:none;padding:16px;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:20px;width:100%;"
             onclick="downloadFullPDF()"
         >
             📥 DOWNLOAD HASIL (PDF)
         </button>
 
 
-        <button 
-            class="btn-restart" 
+        <button
+            class="btn-restart"
             onclick="backToMenu()"
         >
             🔄 PILIH SET LAIN
@@ -509,14 +560,19 @@
 
 
     <footer>
-        &copy; Persona Research & Consulting | WhatsApp:
-        <a 
-            href="https://wa.me/6287742515786" 
-            target="_blank" 
+
+        &copy; Persona Research & Consulting |
+
+        WhatsApp:
+
+        <a
+            href="https://wa.me/6287742515786"
+            target="_blank"
             rel="noopener noreferrer"
         >
             0877 4251 5786
         </a>
+
     </footer>
 
 </div>
@@ -524,48 +580,26 @@
 
 <script>
 
-/* =========================================================
+/* =====================================================
+   TIDAK ADA PASSWORD
+   TIDAK ADA MASTER_PASSWORD
+   TIDAK ADA DEVICE ID
+   TIDAK ADA LOGIN KE GOOGLE SHEET
+   ===================================================== */
+
+
+/* =====================================================
    GOOGLE APPS SCRIPT
-   PASSWORD TIDAK LAGI DISIMPAN DI HTML
-   ========================================================= */
+   HANYA UNTUK MENYIMPAN HASIL
+   ===================================================== */
 
 const GAS_ENDPOINT =
 "https://script.google.com/macros/s/AKfycby_GHSZPDg7UlT_-VJQtw10739IACif9FfnQ5R6M8vvK_i28L3YMbEUk7gasWLgWNNF/exec";
 
 
-/* =========================================================
-   DEVICE ID
-   ========================================================= */
-
-function getDeviceId(){
-
-    const rawData = [
-        navigator.userAgent,
-        navigator.platform,
-        navigator.language,
-        screen.width,
-        screen.height,
-        window.devicePixelRatio,
-        Intl.DateTimeFormat().resolvedOptions().timeZone,
-        navigator.hardwareConcurrency || "cpu"
-    ].join("###");
-
-    let hash = 0;
-
-    for(let i = 0; i < rawData.length; i++){
-
-        hash = ((hash << 5) - hash) + rawData.charCodeAt(i);
-
-        hash |= 0;
-    }
-
-    return "PRC-" + Math.abs(hash);
-}
-
-
-/* =========================================================
+/* =====================================================
    PROTEKSI COPY
-   ========================================================= */
+   ===================================================== */
 
 function preventCopy(e){
 
@@ -588,9 +622,9 @@ function preventCopy(e){
 }
 
 
-/* =========================================================
+/* =====================================================
    SHUFFLE
-   ========================================================= */
+   ===================================================== */
 
 function shuffleArray(array){
 
@@ -607,12 +641,13 @@ function shuffleArray(array){
     }
 
     return arr;
+
 }
 
 
-/* =========================================================
-   DATABASE 10 SET x 10 KOLOM
-   ========================================================= */
+/* =====================================================
+   BANK SOAL
+   ===================================================== */
 
 const BANK_DATABASE = {
 
@@ -749,9 +784,9 @@ const BANK_DATABASE = {
 };
 
 
-/* =========================================================
+/* =====================================================
    VARIABLE
-   ========================================================= */
+   ===================================================== */
 
 let MASTER_BANK = [];
 
@@ -768,107 +803,50 @@ let pName = "";
 let activeChars = [];
 
 
-/* =========================================================
-   LOGIN
-   ========================================================= */
+/* =====================================================
+   MULAI SIMULASI
+   TANPA PASSWORD
+   ===================================================== */
 
-async function startLogin(){
+function startLogin(){
 
     const u =
-        document.getElementById('username').value.trim();
+        document.getElementById('username')
+        .value
+        .trim();
 
-    const p =
-        document.getElementById('password').value.trim();
 
     const statusDiv =
         document.getElementById('loginStatus');
-
-    const btn =
-        document.getElementById('btnLogin');
 
 
     statusDiv.textContent = "";
 
 
-    if(!u || !p){
+    if(!u){
 
         statusDiv.textContent =
-            "Nama dan Password wajib diisi!";
+            "Nama siswa wajib diisi!";
 
         return;
-    }
-
-
-    btn.disabled = true;
-
-    btn.textContent =
-        "MENGECEK SESI...";
-
-
-    const deviceId =
-        getDeviceId();
-
-
-    try{
-
-        const url =
-            GAS_ENDPOINT +
-            "?password=" +
-            encodeURIComponent(p) +
-            "&deviceId=" +
-            encodeURIComponent(deviceId);
-
-
-        const response =
-            await fetch(url);
-
-
-        const result =
-            await response.json();
-
-
-        if(result.status === "success"){
-
-            proceedToTest(u);
-
-        }else{
-
-            statusDiv.textContent =
-                result.message ||
-                "Password tidak dapat digunakan.";
-
-            btn.disabled = false;
-
-            btn.textContent =
-                "MULAI SIMULASI";
-
-        }
-
-    }catch(error){
-
-        console.error(error);
-
-        statusDiv.textContent =
-            "Gagal terhubung ke sistem. Coba lagi.";
-
-        btn.disabled = false;
-
-        btn.textContent =
-            "MULAI SIMULASI";
 
     }
+
+
+    proceedToTest(u);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    MASUK KE TEST
-   ========================================================= */
+   ===================================================== */
 
 function proceedToTest(userName){
 
     const katKey =
-        document.getElementById('kategoriSoal').value;
+        document.getElementById('kategoriSoal')
+        .value;
 
 
     MASTER_BANK =
@@ -893,9 +871,9 @@ function proceedToTest(userName){
 }
 
 
-/* =========================================================
+/* =====================================================
    COUNTDOWN
-   ========================================================= */
+   ===================================================== */
 
 function triggerCountdown(){
 
@@ -926,12 +904,14 @@ function triggerCountdown(){
 
             count--;
 
+
             if(count > 0){
 
                 countText.textContent =
                     count;
 
-            }else{
+            }
+            else{
 
                 clearInterval(t);
 
@@ -947,9 +927,9 @@ function triggerCountdown(){
 }
 
 
-/* =========================================================
+/* =====================================================
    START KOLOM
-   ========================================================= */
+   ===================================================== */
 
 function startCol(){
 
@@ -986,22 +966,20 @@ function startCol(){
         `KOLOM: ${currentIdx + 1} / 10`;
 
 
-    document.getElementById('topRow')
-        .scrollIntoView({
-            behavior:'smooth',
-            block:'start'
-        });
+    document.getElementById('timer')
+        .textContent = "01:00";
 
 
-    let hSimbol = '';
+    let hSimbol = "";
 
-    let hLabel = '';
+    let hLabel = "";
 
 
     activeChars.forEach((c,i)=>{
 
         hSimbol +=
             `<td><span>${c}</span></td>`;
+
 
         hLabel +=
             `<td class="label">${String.fromCharCode(65+i)}</td>`;
@@ -1039,6 +1017,7 @@ function startCol(){
 
                 clearInterval(interval);
 
+
                 currentIdx++;
 
 
@@ -1046,7 +1025,8 @@ function startCol(){
 
                     triggerCountdown();
 
-                }else{
+                }
+                else{
 
                     showFinal();
 
@@ -1059,9 +1039,9 @@ function startCol(){
 }
 
 
-/* =========================================================
+/* =====================================================
    SOAL BERIKUTNYA
-   ========================================================= */
+   ===================================================== */
 
 function nextSoal(){
 
@@ -1083,11 +1063,8 @@ function nextSoal(){
         shuffleArray(remainingChars);
 
 
-    const soalCont =
-        document.getElementById('soalCont');
-
-
-    soalCont.innerHTML =
+    document.getElementById('soalCont')
+        .innerHTML =
         display
         .map(s => `<span>${s}</span>`)
         .join('');
@@ -1097,7 +1074,7 @@ function nextSoal(){
         document.getElementById('pilihan');
 
 
-    cont.innerHTML = '';
+    cont.innerHTML = "";
 
 
     ['A','B','C','D','E']
@@ -1124,7 +1101,8 @@ function nextSoal(){
 
                 results[currentIdx].b++;
 
-            }else{
+            }
+            else{
 
                 results[currentIdx].s++;
 
@@ -1143,9 +1121,9 @@ function nextSoal(){
 }
 
 
-/* =========================================================
+/* =====================================================
    HASIL AKHIR
-   ========================================================= */
+   ===================================================== */
 
 function showFinal(){
 
@@ -1163,13 +1141,6 @@ function showFinal(){
 
     document.getElementById('resName')
         .textContent = pName;
-
-
-    document.getElementById('mainHeader')
-        .scrollIntoView({
-            behavior:'smooth',
-            block:'start'
-        });
 
 
     const terjawab =
@@ -1264,15 +1235,15 @@ function showFinal(){
 
     narasi +=
         range <= 5
-        ? "Grafik menunjukkan stabilitas emosi dan daya tahan stres yang sangat baik."
-        : "Grafik fluktuatif menunjukkan adanya penurunan konsentrasi pada periode tertentu.";
+        ? "Grafik menunjukkan stabilitas performa yang sangat baik."
+        : "Grafik menunjukkan adanya fluktuasi performa pada periode tertentu.";
 
 
     document.getElementById('kesimpulanNarasi')
         .textContent = narasi;
 
 
-    let h = '';
+    let h = "";
 
 
     results.forEach((r,i)=>{
@@ -1312,12 +1283,20 @@ function showFinal(){
                 ],
 
                 datasets:[{
+
                     label:'Kecepatan',
+
                     data:terjawab,
+
                     borderColor:'#0b2340',
+
                     tension:.3,
+
                     fill:true,
-                    backgroundColor:'rgba(11,35,64,0.1)'
+
+                    backgroundColor:
+                        'rgba(11,35,64,0.1)'
+
                 }]
             },
 
@@ -1330,45 +1309,52 @@ function showFinal(){
                     }
                 }
             }
+
         }
     );
 
 
-    /* SIMPAN HASIL */
-    fetch(GAS_ENDPOINT,{
+    /* ============================
+       SIMPAN HASIL KE GAS
+       ============================ */
 
-        method:'POST',
+    fetch(
+        GAS_ENDPOINT,
+        {
+            method:'POST',
 
-        mode:'no-cors',
+            mode:'no-cors',
 
-        headers:{
-            'Content-Type':'application/json'
-        },
+            headers:{
+                'Content-Type':'application/json'
+            },
 
-        body:JSON.stringify({
+            body:JSON.stringify({
 
-            action:'submit',
+                action:'submit',
 
-            username:pName,
+                username:pName,
 
-            skor:skorTotal,
+                skor:skorTotal,
 
-            nilai:nilaiFix,
+                nilai:nilaiFix,
 
-            detail:results
+                detail:results
 
-        })
+            })
 
-    }).catch(
+        }
+    )
+    .catch(
         err => console.log(err)
     );
 
 }
 
 
-/* =========================================================
-   KEMBALI PILIH SET
-   ========================================================= */
+/* =====================================================
+   KEMBALI KE MENU
+   ===================================================== */
 
 function backToMenu(){
 
@@ -1397,22 +1383,12 @@ function backToMenu(){
         .style.display = 'block';
 
 
-    const btn =
-        document.getElementById('btnLogin');
-
-
-    btn.disabled = false;
-
-    btn.textContent =
-        'MULAI SIMULASI';
-
-
-    document.getElementById('password')
-        .value = '';
+    document.getElementById('username')
+        .value = "";
 
 
     document.getElementById('loginStatus')
-        .textContent = '';
+        .textContent = "";
 
 
     document.getElementById('mainHeader')
@@ -1424,9 +1400,9 @@ function backToMenu(){
 }
 
 
-/* =========================================================
+/* =====================================================
    DOWNLOAD PDF
-   ========================================================= */
+   ===================================================== */
 
 async function downloadFullPDF(){
 
@@ -1434,8 +1410,7 @@ async function downloadFullPDF(){
         document.getElementById('btnDownload');
 
 
-    btn.style.display =
-        'none';
+    btn.style.display = 'none';
 
 
     const element =
@@ -1487,8 +1462,7 @@ async function downloadFullPDF(){
     );
 
 
-    btn.style.display =
-        'block';
+    btn.style.display = 'block';
 
 }
 
