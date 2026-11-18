@@ -1,862 +1,317 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persona Research & Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --primary: #0f172a;
+            --accent: #d97706;
+            --text: #334155;
+            --muted: #64748b;
+            --border: #e2e8f0;
+        }
 
-<title>TES KECERMATAN - PERSONA RESEARCH & CONSULTING</title>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-<link rel="dns-prefetch" href="//fonts.googleapis.com">
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 20px;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
 
-<style>
-/* CSS RESET & BASE */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        .brand {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
 
-body{
-background:#fcfbf7;
-min-height:100vh;
-overflow-x:hidden;
-color:#1a1a1a;
-}
+        h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
 
-.hidden{
-display:none !important;
-}
+        /* Breadcrumb / Back button inside view */
+        .folder-header {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
 
-/* LOADING SCREEN */
-#loadingScreen{
-position:fixed;
-inset:0;
-background:#ffffff;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:99999;
-}
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-.loader{
-width:60px;
-height:60px;
-border-radius:50%;
-border:5px solid rgba(26,26,26,.1);
-border-top:5px solid #131340;
-animation:spin .8s linear infinite;
-margin-bottom:18px;
-}
+        .back-btn:hover {
+            text-decoration: underline;
+        }
 
-@keyframes spin{
-100%{ transform:rotate(360deg); }
-}
+        .folder-title-indicator {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
 
-/* LOGIN LAYOUT */
-.center-page{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-background:linear-gradient(135deg,#0B0B26 0%,#131340 50%,#1C1C59 100%);
-position:relative;
-}
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
 
-.login-card{
-width:100%;
-max-width:460px;
-padding:50px 40px;
-border-radius:32px;
-text-align:center;
-background:rgba(255,255,255,.98);
-border:1px solid rgba(255,255,255,.2);
-box-shadow:0 25px 60px -15px rgba(11,11,38,.6);
-animation:fadeUp .6s cubic-bezier(.16,1,.3,1);
-}
+        .menu-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
 
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(40px);}
-to{opacity:1;transform:translateY(0);}
-}
+        .menu-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
 
-.login-card h1{
-font-size:26px;
-margin-bottom:8px;
-color:#0B0B26;
-font-weight:700;
-line-height:1.3;
-letter-spacing:-.5px;
-}
+        .card-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
 
-.subtitle{
-color:#131340;
-opacity:.7;
-margin-bottom:35px;
-letter-spacing:2px;
-font-weight:600;
-font-size:12px;
-}
+        .card-info p {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
 
-/* INPUT FORM */
-input{
-width:100%;
-padding:16px 20px;
-border:2px solid #e2e8f0;
-outline:none;
-border-radius:16px;
-margin-bottom:20px;
-font-size:15px;
-background:#f8fafc;
-color:#0B0B26;
-text-align:center;
-transition:all .3s ease;
-font-weight:500;
-}
+        .arrow {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
 
-input:focus{
-border-color:#131340;
-background:#ffffff;
-box-shadow:0 0 0 4px rgba(19,19,64,.15);
-}
+        .menu-card.mix-card {
+            grid-column: 1 / -1;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
 
-.login-btn{
-width:100%;
-padding:16px;
-background:#131340;
-color:#ffffff;
-border-radius:16px;
-font-size:16px;
-font-weight:600;
-border:none;
-cursor:pointer;
-transition:all .3s ease;
-letter-spacing:.5px;
-box-shadow:0 4px 12px rgba(19,19,64,.2);
-}
+        .menu-card.mix-card .card-info h3 {
+            color: #ffffff;
+        }
 
-.login-btn:hover{
-transform:translateY(-2px);
-background:#0B0B26;
-box-shadow:0 8px 20px rgba(11,11,38,.4);
-}
+        .menu-card.mix-card .card-info p {
+            color: #94a3b8;
+        }
 
-/* PREMIUM DASHBOARD */
-#dashboard{
-max-width:1200px;
-margin:0 auto;
-padding:40px 24px;
-}
+        /* Views management */
+        .view-section {
+            display: none;
+        }
 
-.main-header{
-background:#ffffff;
-padding:30px;
-border-radius:24px;
-border:1px solid #e5e5e0;
-box-shadow:0 4px 20px rgba(0,0,0,.02);
-margin-bottom:30px;
-}
+        .view-section.active {
+            display: block;
+        }
 
-.header-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.header-top h2{
-font-size:24px;
-font-weight:700;
-color:#1a1a1a;
-}
-
-.header-right{
-display:flex;
-align-items:center;
-gap:15px;
-flex-wrap:wrap;
-}
-
-.count-box{
-padding:12px 20px;
-border-radius:14px;
-background:#f4f1ea;
-color:#1a1a1a;
-font-weight:600;
-font-size:14px;
-border:1px solid #e5e5e0;
-display:flex;
-align-items:center;
-gap:8px;
-}
-
-.logout-btn{
-padding:12px 22px;
-background:#1a1a1a;
-color:white;
-border-radius:14px;
-font-weight:500;
-font-size:14px;
-border:none;
-cursor:pointer;
-transition:.3s;
-}
-
-.logout-btn:hover{
-background:#f44336;
-box-shadow:0 4px 12px rgba(244,67,54,.2);
-}
-
-.notice-bar{
-background:#131340;
-color:#ffffff;
-padding:8px 20px;
-border-radius:12px;
-margin-top:20px;
-font-size:12px;
-font-weight:500;
-overflow:hidden;
-white-space:nowrap;
-border:1px solid #0B0B26;
-}
-
-.notice-bar marquee{
-vertical-align:middle;
-}
-
-/* CATEGORY */
-.cat-wrapper{
-margin-bottom:40px;
-}
-
-.cat-title{
-font-size:14px;
-text-transform:uppercase;
-letter-spacing:2px;
-color:#555555;
-font-weight:700;
-margin-bottom:20px;
-padding-left:5px;
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.cat-title::after{
-content:'';
-flex:1;
-height:1px;
-background:#e5e5e0;
-}
-
-/* CARDS */
-.menu-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
-}
-
-.menu-card{
-padding:30px 24px;
-border-radius:22px;
-text-align:left;
-cursor:pointer;
-transition:all .3s cubic-bezier(.25,.8,.25,1);
-background:#131340;
-border:1px solid #0B0B26;
-color:#ffffff;
-box-shadow:0 4px 15px rgba(19,19,64,.15);
-display:flex;
-flex-direction:column;
-justify-content:center;
-position:relative;
-overflow:hidden;
-}
-
-.menu-card::after{
-content:'➔';
-position:absolute;
-right:25px;
-bottom:25px;
-font-size:18px;
-color:rgba(255,255,255,.25);
-transition:.3s;
-}
-
-.menu-card:hover::after{
-color:#ffffff;
-transform:translateX(5px);
-}
-
-.menu-card span{
-font-size:16px;
-font-weight:600;
-line-height:1.4;
-padding-right:20px;
-}
-
-.menu-card small{
-font-size:11.5px;
-color:#cbd5e1;
-letter-spacing:.2px;
-font-weight:400;
-margin-top:10px;
-line-height:1.5;
-display:block;
-}
-
-.menu-card:hover{
-transform:translateY(-5px);
-background:#0B0B26 !important;
-box-shadow:0 12px 28px rgba(11,11,38,.35) !important;
-border-color:#050514;
-}
-
-/* POPUP */
-.popup{
-position:fixed;
-top:30px;
-right:30px;
-background:#1a1a1a;
-color:white;
-padding:18px 24px;
-border-left:5px solid #cbd5e1;
-border-radius:14px;
-z-index:9999;
-}
-
-footer{
-text-align:center;
-padding:60px 30px 30px 30px;
-color:#888888;
-font-size:13px;
-letter-spacing:1px;
-font-weight:500;
-border-top:1px solid #e5e5e0;
-margin-top:40px;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-.login-card{
-padding:40px 24px;
-border-radius:26px;
-}
-
-.login-card h1{
-font-size:22px;
-}
-
-#dashboard{
-padding:20px 16px;
-}
-
-.main-header{
-padding:20px;
-border-radius:18px;
-}
-
-.menu-grid{
-grid-template-columns:1fr;
-}
-}
-</style>
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 40px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="loadingScreen" style="display:none;">
-<div class="loader"></div>
-<h3 style="color:#1a1a1a;font-weight:600;">Menghubungkan ke Sistem...</h3>
-</div>
-
-<section id="loginPage" class="center-page">
-<div class="login-card">
-<h1>SIMULASI KECERMATAN<br>REKRUTMEN POLRI</h1>
-<p class="subtitle">PERSONA RESEARCH & CONSULTING</p>
-<input type="password" id="passwordInput" placeholder="Masukkan Kata Sandi Akses (KEC...)">
-<button class="login-btn" id="loginBtn">MASUK KE DASHBOARD</button>
-</div>
-</section>
-
-<section id="dashboard" class="hidden">
-<div class="main-header">
-<div class="header-top">
-<div>
-<h2>Persona Research & Consulting</h2>
-<p id="welcomeText" style="color:#666666;margin-top:4px;font-size:14px;"></p>
-</div>
-
-<div class="header-right">
-<div class="count-box" id="countdown">Memuat Sisa Waktu...</div>
-<button class="logout-btn" id="logoutBtn">Keluar</button>
-</div>
-</div>
-
-<div class="notice-bar">
-<marquee scrollamount="4">
-📢 PENGUMUMAN: Laksanakan latihan kecermatan secara rutin sesuai instruksi untuk melatih kecepatan, ketepatan, dan konsentrasi tinggi.
-</marquee>
-</div>
-</div>
-
-<div class="cat-wrapper">
-<div class="cat-title">Menu Simulasi Tes Kecermatan</div>
-
-<div class="menu-grid">
-
-<div class="menu-card" data-link="gambar.html">
-<span>🎯 TES KECERMATAN GAMBAR</span>
-<small>Simulasi ketelitian identifikasi objek gambar dengan sistem pembatas waktu ketat persis CAT kepolisian.</small>
-</div>
-
-<div class="menu-card" data-link="simbol.html">
-<span>🔣 TES KECERMATAN SIMBOL</span>
-<small>Latihan konsentrasi tinggi pencarian simbol dan tanda khusus secara cepat dan akurat.</small>
-</div>
-
-<div class="menu-card" data-link="angka.html">
-<span>🔢 TES KECERMATAN ANGKA</span>
-<small>Uji kecepatan hitung cepat dan ketepatan identifikasi deret angka di bawah tekanan waktu.</small>
-</div>
-
-<div class="menu-card" data-link="huruf.html">
-<span>🔤 TES KECERMATAN HURUF (HURUF HILANG)</span>
-<small>Evaluasi ketelitian visual dalam mengenali pola huruf dan mengeliminasi distraksi fokus.</small>
-</div>
-
-<div class="menu-card" data-link="mix.html">
-<span>⚡ TES KECERMATAN MIX / KOMBINASI</span>
-<small>Simulasi gabungan seluruh variabel uji kecermatan tingkat lanjut untuk persiapan optimal.</small>
-</div>
-
-</div>
-</div>
-</section>
-
-<div id="popup" class="popup hidden"></div>
-
-<footer>
-&copy; PERSONA RESEARCH & CONSULTING 087742515786 &bull; ALL RIGHTS RESERVED
-</footer>
-
-<script>
-
-if(!localStorage.getItem("layoutCleaned_kec_v2")){
-localStorage.clear();
-localStorage.setItem("layoutCleaned_kec_v2","true");
-}
-
-/* =========================================================
-   APPS SCRIPT BARU
-   ========================================================= */
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_GHSZPDg7UlT_-VJQtw10739IACif9FfnQ5R6M8vvK_i28L3YMbEUk7gasWLgWNNF/exec";
-
-
-/* =========================================================
-   PASSWORD TETAP SAMA
-   ========================================================= */
-
-const passwordList = [
-
-"PRC0501",
-"prc05",
-"KEC3V9",
-"KEC5X1",
-"sempurna",
-"suriya",
-"SURIYA1",
-"KEC2N3",
-"KEC4K7",
-"KEC6L5",
-"KEC0J9",
-"KEC5W2",
-"KEC8Y1",
-"KEC3Q6",
-"KEC1T4",
-"KEC9B7",
-"KEC2M5",
-"KEC7F8",
-"KEC4S3",
-"KEC6D9",
-"KEC0G2",
-"KEC3H1",
-"KEC9V6",
-"KEC1X5",
-"KEC8R7",
-"KEC5P2",
-"KEC7N4",
-"KEC2K9",
-"KEC4L3",
-"KEC6J8",
-"KEC0M1",
-"KEC7W5",
-"KEC2Y8",
-"KEC4Q3",
-"KEC9T6",
-"KEC1B9",
-"KEC8F2",
-"KEC3S7",
-"KEC5D4",
-"KEC6G1",
-"KEC0H8",
-"KEC2V4",
-"KEC5X9",
-"KEC8R1",
-"KEC3H6",
-"KEC1P7",
-"KEC9N2",
-"KEC7K3",
-"KEC4L8",
-"KEC6J5",
-"KEC0W9",
-"KEC4Y2",
-"KEC1Q7",
-"KEC8T3",
-"KEC5B6",
-"KEC2F9",
-"KEC9S4",
-"KEC7D1",
-"KEC3G8",
-"KEC6H2",
-"KEC0V5",
-"KEC8X3",
-"KEC2R9",
-"KEC6P1",
-"KEC4N7",
-"KEC1K2",
-"KEC9L8",
-"KEC5J4",
-"KEC7M6",
-"KEC3W9",
-"KEC0Y3",
-"KEC1Q5",
-"KEC6T8",
-"KEC3B2",
-"KEC9F4",
-"KEC7S1",
-"KEC2D9",
-"KEC5G6",
-"KEC8H3",
-"KEC4V7",
-"KEC0X2",
-"KEC5R4",
-"KEC9P1",
-"KEC2H7",
-"KEC7N8",
-"KEC3K5",
-"KEC1L9",
-"KEC6J3",
-"KEC8W2",
-"KEC0M6",
-"KEC4Y1",
-"KEC3Q8",
-"KEC7T2",
-"KEC1B5",
-"KEC9F6",
-"KEC5S3",
-"KEC2D1",
-"KEC8G7",
-"KEC6H9",
-"KEC0V4",
-"KEC4X2"
-
-];
-
-
-const loginBtn=document.getElementById("loginBtn");
-const passwordInput=document.getElementById("passwordInput");
-const loginPage=document.getElementById("loginPage");
-const dashboard=document.getElementById("dashboard");
-const popup=document.getElementById("popup");
-const welcomeText=document.getElementById("welcomeText");
-const countdown=document.getElementById("countdown");
-const loadingScreen=document.getElementById("loadingScreen");
-
-
-function getDeviceId(){
-
-const rawData=[
-navigator.userAgent,
-navigator.platform,
-navigator.language,
-screen.width,
-screen.height,
-window.devicePixelRatio,
-Intl.DateTimeFormat().resolvedOptions().timeZone,
-navigator.hardwareConcurrency || "cpu"
-].join("###");
-
-return generateHash(rawData);
-
-}
-
-
-function generateHash(str){
-
-let hash=0;
-
-for(let i=0;i<str.length;i++){
-
-hash=((hash<<5)-hash)+str.charCodeAt(i);
-hash|=0;
-
-}
-
-return "PRC-"+Math.abs(hash);
-
-}
-
-
-function showPopup(text){
-
-popup.innerText=text;
-popup.classList.remove("hidden");
-
-setTimeout(()=>{
-popup.classList.add("hidden");
-},2500);
-
-}
-
-
-loginBtn.addEventListener("click",loginSystem);
-
-
-async function loginSystem(){
-
-const input=passwordInput.value.trim().toUpperCase();
-
-
-if(!passwordList.includes(input)){
-
-showPopup("Password salah.");
-return;
-
-}
-
-
-loadingScreen.style.display="flex";
-
-const deviceId=getDeviceId();
-
-
-try{
-
-const response=await fetch(
-`${SCRIPT_URL}?password=${encodeURIComponent(input)}&deviceId=${encodeURIComponent(deviceId)}`
-);
-
-const result=await response.json();
-
-
-if(result.status==="success"){
-
-localStorage.setItem("loggedInUser",input);
-localStorage.setItem("userFirstLogin",result.firstLogin);
-
-showPopup("Login berhasil.");
-
-openDashboard(
-input,
-result.firstLogin
-);
-
-}else{
-
-showPopup(result.message);
-
-loadingScreen.style.display="none";
-
-}
-
-}catch(error){
-
-showPopup(
-"Gagal sinkronisasi data online. Pastikan Web App Script aktif."
-);
-
-loadingScreen.style.display="none";
-
-}
-
-}
-
-
-function openDashboard(user,firstLoginTime){
-
-loginPage.classList.add("hidden");
-
-dashboard.classList.remove("hidden");
-
-loadingScreen.style.display="none";
-
-welcomeText.innerHTML=`Peserta Aktif: <b>${user}</b>`;
-
-startCountdown(Number(firstLoginTime));
-
-}
-
-
-let countdownInterval=null;
-
-
-function startCountdown(firstLoginTime){
-
-clearInterval(countdownInterval);
-
-
-countdownInterval=setInterval(()=>{
-
-const end=
-firstLoginTime+
-(30*24*60*60*1000);
-
-const diff=end-Date.now();
-
-
-if(diff<=0){
-
-countdown.innerText="Expired";
-
-clearInterval(countdownInterval);
-
-localStorage.clear();
-
-setTimeout(()=>{
-location.reload();
-},2000);
-
-return;
-
-}
-
-
-const days=
-Math.floor(
-diff/(1000*60*60*24)
-);
-
-const hours=
-Math.floor(
-(diff/(1000*60*60))%24
-);
-
-const minutes=
-Math.floor(
-(diff/(1000*60))%60
-);
-
-
-countdown.innerText=
-`Sisa Aktif: ${days}H ${hours}J ${minutes}M`;
-
-},1000);
-
-}
-
-
-/* =========================================================
-   CEK LOGIN TERSIMPAN
-   ========================================================= */
-
-const loggedUser=
-localStorage.getItem("loggedInUser");
-
-const localFirstLogin=
-localStorage.getItem("userFirstLogin");
-
-
-if(
-loggedUser &&
-localFirstLogin &&
-passwordList.includes(loggedUser.toUpperCase())
-){
-
-openDashboard(
-loggedUser.toUpperCase(),
-localFirstLogin
-);
-
-}
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click",()=>{
-
-localStorage.clear();
-
-location.reload();
-
-});
-
-
-/* =========================================================
-   PROTEKSI DASAR
-   ========================================================= */
-
-document.addEventListener(
-"contextmenu",
-e=>e.preventDefault()
-);
-
-
-document.addEventListener(
-"keydown",
-e=>{
-
-if(
-e.key==="F12" ||
-(e.ctrlKey && e.shiftKey && e.key==="I") ||
-(e.ctrlKey && e.key==="u")
-){
-
-e.preventDefault();
-
-}
-
-});
-
-
-/* =========================================================
-   MENU
-   ========================================================= */
-
-document
-.querySelectorAll(".menu-card")
-.forEach(card=>{
-
-card.addEventListener("click",()=>{
-
-const target=
-card.getAttribute("data-link");
-
-if(target){
-
-window.location.href=target;
-
-}
-
-});
-
-});
-
-</script>
-
+    <div class="container">
+        <header>
+            <div class="brand">Persona Research & Consulting</div>
+            <h1 id="main-title">Daftar Modul Tes</h1>
+        </header>
+
+        <!-- Folder Header (Navigasi Kembali) -->
+        <div class="folder-header" id="folderHeader">
+            <button class="back-btn" onclick="showMainView()">&larr; Kembali ke Menu Utama</button>
+            <div class="folder-title-indicator" id="folderIndicator">Folder</div>
+        </div>
+
+        <!-- 1. TAMPILAN UTAMA (FOLDER UTAMA) -->
+        <div id="mainView" class="view-section active">
+            <div class="menu-grid">
+                <div class="menu-card" onclick="openFolder('gambar', 'Folder Gambar')">
+                    <div class="card-info">
+                        <h3>📁 Folder Gambar</h3>
+                        <p>Tes Gambar / Figural (1 - 5)</p>
+                    </div>
+                    <div class="arrow">&rarr;</div>
+                </div>
+
+                <div class="menu-card" onclick="openFolder('huruf', 'Folder Huruf')">
+                    <div class="card-info">
+                        <h3>📁 Folder Huruf</h3>
+                        <p>Tes Kecermatan Huruf (1 - 5)</p>
+                    </div>
+                    <div class="arrow">&rarr;</div>
+                </div>
+
+                <div class="menu-card" onclick="openFolder('angka', 'Folder Angka')">
+                    <div class="card-info">
+                        <h3>📁 Folder Angka</h3>
+                        <p>Tes Kecermatan Angka (1 - 5)</p>
+                    </div>
+                    <div class="arrow">&rarr;</div>
+                </div>
+
+                <div class="menu-card" onclick="openFolder('simbol', 'Folder Simbol')">
+                    <div class="card-info">
+                        <h3>📁 Folder Simbol</h3>
+                        <p>Tes Kecermatan Simbol (1 - 5)</p>
+                    </div>
+                    <div class="arrow">&rarr;</div>
+                </div>
+
+                <div class="menu-card mix-card" onclick="openFolder('mix', 'Folder Mix')">
+                    <div class="card-info">
+                        <h3>📁 Folder Mix</h3>
+                        <p>Kombinasi / Campuran (1 - 5)</p>
+                    </div>
+                    <div class="arrow">&rarr;</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. TAMPILAN ISI FOLDER GAMBAR -->
+        <div id="folder-gambar" class="view-section">
+            <div class="menu-grid">
+                <a href="gambar_1.html" class="menu-card"><div class="card-info"><h3>Gambar 1</h3><p>Modul 1</p></div><div class="arrow">&rarr;</div></a>
+                <a href="gambar_2.html" class="menu-card"><div class="card-info"><h3>Gambar 2</h3><p>Modul 2</p></div><div class="arrow">&rarr;</div></a>
+                <a href="gambar_3.html" class="menu-card"><div class="card-info"><h3>Gambar 3</h3><p>Modul 3</p></div><div class="arrow">&rarr;</div></a>
+                <a href="gambar_4.html" class="menu-card"><div class="card-info"><h3>Gambar 4</h3><p>Modul 4</p></div><div class="arrow">&rarr;</div></a>
+                <a href="gambar_5.html" class="menu-card"><div class="card-info"><h3>Gambar 5</h3><p>Modul 5</p></div><div class="arrow">&rarr;</div></a>
+            </div>
+        </div>
+
+        <!-- 3. TAMPILAN ISI FOLDER HURUF -->
+        <div id="folder-huruf" class="view-section">
+            <div class="menu-grid">
+                <a href="huruf_1.html" class="menu-card"><div class="card-info"><h3>Huruf 1</h3><p>Modul 1</p></div><div class="arrow">&rarr;</div></a>
+                <a href="huruf_2.html" class="menu-card"><div class="card-info"><h3>Huruf 2</h3><p>Modul 2</p></div><div class="arrow">&rarr;</div></a>
+                <a href="huruf_3.html" class="menu-card"><div class="card-info"><h3>Huruf 3</h3><p>Modul 3</p></div><div class="arrow">&rarr;</div></a>
+                <a href="huruf_4.html" class="menu-card"><div class="card-info"><h3>Huruf 4</h3><p>Modul 4</p></div><div class="arrow">&rarr;</div></a>
+                <a href="huruf_5.html" class="menu-card"><div class="card-info"><h3>Huruf 5</h3><p>Modul 5</p></div><div class="arrow">&rarr;</div></a>
+            </div>
+        </div>
+
+        <!-- 4. TAMPILAN ISI FOLDER ANGKA -->
+        <div id="folder-angka" class="view-section">
+            <div class="menu-grid">
+                <a href="angka_1.html" class="menu-card"><div class="card-info"><h3>Angka 1</h3><p>Modul 1</p></div><div class="arrow">&rarr;</div></a>
+                <a href="angka_2.html" class="menu-card"><div class="card-info"><h3>Angka 2</h3><p>Modul 2</p></div><div class="arrow">&rarr;</div></a>
+                <a href="angka_3.html" class="menu-card"><div class="card-info"><h3>Angka 3</h3><p>Modul 3</p></div><div class="arrow">&rarr;</div></a>
+                <a href="angka_4.html" class="menu-card"><div class="card-info"><h3>Angka 4</h3><p>Modul 4</p></div><div class="arrow">&rarr;</div></a>
+                <a href="angka_5.html" class="menu-card"><div class="card-info"><h3>Angka 5</h3><p>Modul 5</p></div><div class="arrow">&rarr;</div></a>
+            </div>
+        </div>
+
+        <!-- 5. TAMPILAN ISI FOLDER SIMBOL -->
+        <div id="folder-simbol" class="view-section">
+            <div class="menu-grid">
+                <a href="simbol_1.html" class="menu-card"><div class="card-info"><h3>Simbol 1</h3><p>Modul 1</p></div><div class="arrow">&rarr;</div></a>
+                <a href="simbol_2.html" class="menu-card"><div class="card-info"><h3>Simbol 2</h3><p>Modul 2</p></div><div class="arrow">&rarr;</div></a>
+                <a href="simbol_3.html" class="menu-card"><div class="card-info"><h3>Simbol 3</h3><p>Modul 3</p></div><div class="arrow">&rarr;</div></a>
+                <a href="simbol_4.html" class="menu-card"><div class="card-info"><h3>Simbol 4</h3><p>Modul 4</p></div><div class="arrow">&rarr;</div></a>
+                <a href="simbol_5.html" class="menu-card"><div class="card-info"><h3>Simbol 5</h3><p>Modul 5</p></div><div class="arrow">&rarr;</div></a>
+            </div>
+        </div>
+
+        <!-- 6. TAMPILAN ISI FOLDER MIX -->
+        <div id="folder-mix" class="view-section">
+            <div class="menu-grid">
+                <a href="mix_1.html" class="menu-card"><div class="card-info"><h3>Mix 1</h3><p>Modul 1</p></div><div class="arrow">&rarr;</div></a>
+                <a href="mix_2.html" class="menu-card"><div class="card-info"><h3>Mix 2</h3><p>Modul 2</p></div><div class="arrow">&rarr;</div></a>
+                <a href="mix_3.html" class="menu-card"><div class="card-info"><h3>Mix 3</h3><p>Modul 3</p></div><div class="arrow">&rarr;</div></a>
+                <a href="mix_4.html" class="menu-card"><div class="card-info"><h3>Mix 4</h3><p>Modul 4</p></div><div class="arrow">&rarr;</div></a>
+                <a href="mix_5.html" class="menu-card"><div class="card-info"><h3>Mix 5</h3><p>Modul 5</p></div><div class="arrow">&rarr;</div></a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; Persona Research & Consulting
+    </footer>
+
+    <script>
+        function openFolder(folderName, titleText) {
+            // Sembunyikan semua section folder dan main view
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            
+            // Tampilkan section folder yang dipilih
+            document.getElementById('folder-' + folderName).classList.add('active');
+            
+            // Ubah header title & tampilkan tombol kembali
+            document.getElementById('main-title').innerText = titleText;
+            document.getElementById('folderHeader').style.display = 'flex';
+        }
+
+        function showMainView() {
+            // Sembunyikan semua section folder
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            
+            // Tampilkan kembali main view
+            document.getElementById('mainView').classList.add('active');
+            
+            // Kembalikan header utama
+            document.getElementById('main-title').innerText = 'Daftar Modul Tes';
+            document.getElementById('folderHeader').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
